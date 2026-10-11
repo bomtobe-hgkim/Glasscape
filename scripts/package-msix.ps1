@@ -6,12 +6,13 @@ param(
     [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$PublisherDisplayName,
     [Parameter(Mandatory = $true)][ValidatePattern('^[A-Z0-9]{12}$')][string]$StoreId,
     [ValidatePattern('^\d+\.\d+\.\d+\.\d+$')][string]$Version = '2.1.0.0',
-    [string]$OutputDirectory = (Join-Path $PSScriptRoot '..\dist\store'),
+    [string]$OutputDirectory,
     [string]$SdkBinDirectory,
     [switch]$SkipBuild
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+if (-not $OutputDirectory) { $OutputDirectory = Join-Path $PSScriptRoot '..\dist\store' }
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..')).TrimEnd('\')
 . (Join-Path $projectRoot 'packaging\SourceArchivePolicy.ps1')
 $distRoot = Join-Path $projectRoot 'dist'

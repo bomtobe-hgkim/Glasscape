@@ -1,8 +1,9 @@
 #Requires -Version 5.1
 [CmdletBinding()]
-param([string]$Destination = (Join-Path $PSScriptRoot 'Assets'))
+param([string]$Destination)
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+if (-not $Destination) { $Destination = Join-Path $PSScriptRoot 'Assets' }
 Add-Type -AssemblyName System.Drawing
 New-Item -ItemType Directory -Path $Destination -Force | Out-Null
 $source = [Drawing.Image]::FromFile((Join-Path $PSScriptRoot '..\assets\app-icon.png'))

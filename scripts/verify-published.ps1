@@ -1,11 +1,13 @@
 #Requires -Version 5.1
 #Requires -PSEdition Desktop
 param(
-    [string]$Executable = (Join-Path $PSScriptRoot '..\dist\TransparentTaskbar-win-x64\TransparentTaskbar.exe'),
-    [string]$OutputDirectory = (Join-Path $PSScriptRoot '..\artifacts\published-verification')
+    [string]$Executable,
+    [string]$OutputDirectory
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+if (-not $Executable) { $Executable = Join-Path $PSScriptRoot '..\dist\TransparentTaskbar-win-x64\TransparentTaskbar.exe' }
+if (-not $OutputDirectory) { $OutputDirectory = Join-Path $PSScriptRoot '..\artifacts\published-verification' }
 $Executable = (Resolve-Path -LiteralPath $Executable).Path
 if (@(Get-Process -Name TransparentTaskbar -ErrorAction SilentlyContinue).Count) { throw 'Close the existing TransparentTaskbar process before testing.' }
 Add-Type -AssemblyName System.Windows.Forms, System.Drawing
