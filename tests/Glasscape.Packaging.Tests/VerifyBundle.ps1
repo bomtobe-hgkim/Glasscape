@@ -49,7 +49,7 @@ try {
         foreach ($required in @('coreclr.dll', 'hostfxr.dll', 'WindowsBase.dll', 'Microsoft.Windows.SDK.NET.dll', 'WinRT.Runtime.dll', 'ExplorerTAP.dll', 'mpv/mpv.exe', 'LICENSE.md', 'TranslucentTB-LICENSE.md', 'TranslucentTB-NOTICE.md', 'mpv-NOTICE.md', 'Framework-Licenses/Microsoft.NETCore.App/LICENSE.TXT', 'Framework-Licenses/Microsoft.NETCore.App/THIRD-PARTY-NOTICES.TXT', 'Framework-Licenses/Microsoft.WindowsDesktop.App/LICENSE', 'Framework-Licenses/CsWinRT-LICENSE.txt', 'Framework-Licenses/sdk_license.rtf', 'Sources/Glasscape-source.zip', 'Sources/TranslucentTB-2026.2-source.zip', 'Sources/mpv/mpv-v0.41.0-source.zip', 'Sources/mpv/source/FFmpeg-1fcb201.zip', 'Sources/mpv/source/libiconv-1.18.tar.gz', 'Sources/mpv/provenance/build-mingw64.sh')) {
             Assert ($files -contains $required) "The package includes $required."
         }
-        foreach ($required in @('LICENSE-MIT.txt', 'LICENSE-GPL-3.0.md', 'THIRD_PARTY_NOTICES.md', 'PRIVACY.md', 'SUPPORT.md', 'SECURITY.md', 'Framework-Licenses/WindowsSDK-NET-Ref-LICENSE.rtf')) {
+        foreach ($required in @('LICENSE-MIT.txt', 'LICENSE-GPL-3.0.md', 'THIRD_PARTY_NOTICES.md', 'PRIVACY.md', 'SUPPORT.md', 'SECURITY.md', 'SECURITY_REVIEW.md', 'Framework-Licenses/WindowsSDK-NET-Ref-LICENSE.rtf')) {
             Assert ($files -contains $required) "The package includes $required."
         }
         $runtimeEntry = $package.GetEntry('TransparentTaskbar.runtimeconfig.json')

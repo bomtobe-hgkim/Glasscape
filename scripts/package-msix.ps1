@@ -83,7 +83,7 @@ foreach ($item in Get-ChildItem -LiteralPath $stage -Recurse -File) {
 & (Join-Path $projectRoot 'packaging\New-PackageAssets.ps1')
 Copy-Item -LiteralPath (Join-Path $projectRoot 'packaging\Assets') -Destination $stage -Recurse -Force
 Copy-Item -LiteralPath (Join-Path $projectRoot 'packaging\Strings') -Destination $stage -Recurse -Force
-foreach ($name in @('README.md', 'LICENSE.md', 'LICENSE-MIT.txt', 'LICENSE-GPL-3.0.md', 'THIRD_PARTY_NOTICES.md', 'PRIVACY.md', 'SUPPORT.md', 'SECURITY.md')) {
+foreach ($name in @('README.md', 'LICENSE.md', 'LICENSE-MIT.txt', 'LICENSE-GPL-3.0.md', 'THIRD_PARTY_NOTICES.md', 'PRIVACY.md', 'SUPPORT.md', 'SECURITY.md', 'SECURITY_REVIEW.md')) {
     $document = Join-Path $projectRoot $name
     if (-not (Test-Path -LiteralPath $document)) { throw "Required release document is missing: $name" }
     Copy-Item -LiteralPath $document -Destination $stage -Force
