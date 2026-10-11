@@ -15,10 +15,10 @@ rights that an upstream author may have granted over their own work.
 
 | File | Provenance and scope |
 | --- | --- |
-| `src/TransparentTaskbar/NativeMethods.cs` | C# interop declaration translation of the TranslucentTB 2026.2 ExplorerTAP API, including its COM interface GUID and method order. Also contains Windows API declarations. |
-| `src/TransparentTaskbar/WindowsTaskbarBackend.cs` | Taskbar detection/classification and restoration adapted from TranslucentTB 2026.2, with Glasscape-specific .NET module enumeration, lifecycle and error handling. |
-| `src/TransparentTaskbar/Wallpaper/DesktopLayer.cs` | Desktop layer discovery and parenting adapted from Lively Wallpaper's Progman/WorkerW implementation, with Glasscape-specific validation, timeout, host and positioning changes. |
-| `src/TransparentTaskbar/Wallpaper/WallpaperNativeMethods.cs` | Companion interop/helper file conservatively included in the GPL desktop integration scope. Windows API declarations and constants are identified as interoperability information; this designation does not claim ownership of Windows APIs. |
+| `src/Glasscape/NativeMethods.cs` | C# interop declaration translation of the TranslucentTB 2026.2 ExplorerTAP API, including its COM interface GUID and method order. Also contains Windows API declarations. |
+| `src/Glasscape/WindowsTaskbarBackend.cs` | Taskbar detection/classification and restoration adapted from TranslucentTB 2026.2, with Glasscape-specific .NET module enumeration, lifecycle and error handling. |
+| `src/Glasscape/Wallpaper/DesktopLayer.cs` | Desktop layer discovery and parenting adapted from Lively Wallpaper's Progman/WorkerW implementation, with Glasscape-specific validation, timeout, host and positioning changes. |
+| `src/Glasscape/Wallpaper/WallpaperNativeMethods.cs` | Companion interop/helper file conservatively included in the GPL desktop integration scope. Windows API declarations and constants are identified as interoperability information; this designation does not claim ownership of Windows APIs. |
 
 Other BOMTOBE-authored app source files, tests, build scripts and documentation
 use MIT unless a file or its directory carries another notice. The declarations

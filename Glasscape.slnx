@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Glasscape/Glasscape.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Glasscape.Tests/Glasscape.Tests.csproj" />
+    <Project Path="tests/Glasscape.Integration/Glasscape.Integration.csproj" />
+    <Project Path="tests/Glasscape.Settings.Tests/Glasscape.Settings.Tests.csproj" />
+    <Project Path="tests/Glasscape.Wallpaper.Tests/Glasscape.Wallpaper.Tests.csproj" />
+    <Project Path="tests/Glasscape.Desktop.Integration/Glasscape.Desktop.Integration.csproj" />
+    <Project Path="tests/Glasscape.UI.Tests/Glasscape.UI.Tests.csproj" />
+    <Project Path="tests/Glasscape.Packaging.Tests/Glasscape.Packaging.Tests.csproj" />
+  </Folder>
+</Solution>

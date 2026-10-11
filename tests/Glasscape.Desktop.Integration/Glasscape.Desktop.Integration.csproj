@@ -8,7 +8,7 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../../src/TransparentTaskbar/TransparentTaskbar.csproj" />
-    <Compile Include="../TransparentTaskbar.Integration/WallpaperChecks.cs" Link="WallpaperChecks.cs" />
+    <ProjectReference Include="../../src/Glasscape/Glasscape.csproj" />
+    <Compile Include="../Glasscape.Integration/WallpaperChecks.cs" Link="WallpaperChecks.cs" />
   </ItemGroup>
 </Project>

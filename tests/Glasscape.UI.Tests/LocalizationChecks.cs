@@ -1,7 +1,7 @@
 using System.Text.Json;
-using TransparentTaskbar.Settings;
-using TransparentTaskbar.UI;
-using TransparentTaskbar.Localization;
+using Glasscape.Settings;
+using Glasscape.UI;
+using Glasscape.Localization;
 using System.Globalization;
 using System.Resources;
 using System.Collections;
@@ -17,7 +17,7 @@ internal static class LocalizationChecks
         if (AppText.ResolveCulture("en-US", CultureInfo.GetCultureInfo("ko-KR")).Name != "en-US") failures.Add("An explicit English preference must override Korean Windows.");
         if (AppText.ResolveCulture("ko-KR", CultureInfo.GetCultureInfo("en-US")).Name != "ko-KR") failures.Add("An explicit Korean preference must override English Windows.");
         if (AppText.ResolveCulture("unsupported", CultureInfo.GetCultureInfo("fr-FR")).Name != "en-US") failures.Add("An unknown saved preference must use the system fallback.");
-        var resources = new ResourceManager("TransparentTaskbar.Localization.Strings", typeof(AppText).Assembly);
+        var resources = new ResourceManager("Glasscape.Localization.Strings", typeof(AppText).Assembly);
         var english = resources.GetResourceSet(CultureInfo.GetCultureInfo("en-US"), true, true)!.Cast<DictionaryEntry>().ToDictionary(entry => (string)entry.Key, entry => (string)entry.Value!);
         var korean = resources.GetResourceSet(CultureInfo.GetCultureInfo("ko-KR"), true, false)!.Cast<DictionaryEntry>().ToDictionary(entry => (string)entry.Key, entry => (string)entry.Value!);
         if (!english.Keys.Order().SequenceEqual(korean.Keys.Order())) failures.Add("Both languages must contain the full resource key set; a missing Korean entry must not silently fall back.");

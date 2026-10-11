@@ -8,15 +8,15 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../src/TransparentTaskbar/UI/*.cs" Link="UI/%(Filename)%(Extension)" />
-    <Compile Include="../../src/TransparentTaskbar/Settings/AppSettings.cs" Link="AppSettings.cs" />
-    <Compile Include="../../src/TransparentTaskbar/Settings/SettingsStore.cs" Link="SettingsStore.cs" />
-    <Compile Include="../../src/TransparentTaskbar/Settings/BundledWallpapers.cs" Link="BundledWallpapers.cs" />
-    <Compile Include="../../src/TransparentTaskbar/Packaging/PackageIdentity.cs" Link="PackageIdentity.cs" />
-    <Compile Include="../../src/TransparentTaskbar/Localization/*.cs" Link="Localization/%(Filename)%(Extension)" />
-    <EmbeddedResource Include="../../src/TransparentTaskbar/Localization/Strings*.resx" Link="Localization/%(Filename)%(Extension)" LogicalName="TransparentTaskbar.Localization.%(Filename).resources" />
-    <Compile Include="../../src/TransparentTaskbar/Wallpaper/WallpaperModels.cs" Link="WallpaperModels.cs" />
-    <EmbeddedResource Include="../../assets/app.ico" LogicalName="TransparentTaskbar.Assets.AppIcon.ico" />
-    <EmbeddedResource Include="../../assets/app-icon.png" LogicalName="TransparentTaskbar.Assets.AppIcon.png" />
+    <Compile Include="../../src/Glasscape/UI/*.cs" Link="UI/%(Filename)%(Extension)" />
+    <Compile Include="../../src/Glasscape/Settings/AppSettings.cs" Link="AppSettings.cs" />
+    <Compile Include="../../src/Glasscape/Settings/SettingsStore.cs" Link="SettingsStore.cs" />
+    <Compile Include="../../src/Glasscape/Settings/BundledWallpapers.cs" Link="BundledWallpapers.cs" />
+    <Compile Include="../../src/Glasscape/Packaging/PackageIdentity.cs" Link="PackageIdentity.cs" />
+    <Compile Include="../../src/Glasscape/Localization/*.cs" Link="Localization/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../src/Glasscape/Localization/Strings*.resx" Link="Localization/%(Filename)%(Extension)" LogicalName="Glasscape.Localization.%(Filename).resources" />
+    <Compile Include="../../src/Glasscape/Wallpaper/WallpaperModels.cs" Link="WallpaperModels.cs" />
+    <EmbeddedResource Include="../../assets/app.ico" LogicalName="Glasscape.Assets.AppIcon.ico" />
+    <EmbeddedResource Include="../../assets/app-icon.png" LogicalName="Glasscape.Assets.AppIcon.png" />
   </ItemGroup>
 </Project>

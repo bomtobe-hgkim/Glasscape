@@ -92,7 +92,7 @@ void Link(string path, string target, bool directory)
 }
 static void Copy(string source, string destination)
 {
-    var type = Assembly.GetExecutingAssembly().GetType("TransparentTaskbar.InstallationCopyGuard")
+    var type = Assembly.GetExecutingAssembly().GetType("Glasscape.InstallationCopyGuard")
         ?? throw new InvalidOperationException("A validated installation copy boundary is missing.");
     var method = type.GetMethod("Copy", BindingFlags.NonPublic | BindingFlags.Static)
         ?? throw new InvalidOperationException("A validated installation copy boundary is missing.");

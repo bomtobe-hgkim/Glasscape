@@ -22,7 +22,7 @@ $repositoryRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $vendorRoot = [IO.Path]::GetFullPath((Join-Path $repositoryRoot 'third_party\TranslucentTB'))
 $nativeRoot = [IO.Path]::GetFullPath((Join-Path $vendorRoot 'win-x64'))
 $temporaryRoot = [IO.Path]::GetFullPath([IO.Path]::GetTempPath())
-$stage = [IO.Path]::GetFullPath((Join-Path $temporaryRoot ('transparent-taskbar-native-' + [guid]::NewGuid())))
+$stage = [IO.Path]::GetFullPath((Join-Path $temporaryRoot ('glasscape-native-' + [guid]::NewGuid())))
 
 function Assert-Sha256([string]$Path, [string]$Expected) {
     $actual = (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()

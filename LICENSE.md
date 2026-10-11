@@ -7,7 +7,7 @@ Glasscape has mixed source licenses; the distributed application is not MIT-only
   are available under the [MIT License](LICENSE-MIT.txt), except for the exclusions below.
 - `NativeMethods.cs`, `WindowsTaskbarBackend.cs`, `Wallpaper/DesktopLayer.cs`
   and `Wallpaper/WallpaperNativeMethods.cs`, relative to
-  `src/TransparentTaskbar/`, are designated GPL-3.0-only.
+  `src/Glasscape/`, are designated GPL-3.0-only.
   They preserve upstream-derived taskbar/desktop integration and are excluded
   from the MIT grant. The full terms are in [LICENSE-GPL-3.0.md](LICENSE-GPL-3.0.md).
 - Third-party source, binaries and notices under `third_party/` retain their own

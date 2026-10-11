@@ -8,9 +8,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../src/TransparentTaskbar/Wallpaper/*.cs" Link="Wallpaper/%(Filename)%(Extension)" />
-    <Compile Include="../../src/TransparentTaskbar/Settings/AppSettings.cs" Link="AppSettings.cs" />
-    <Compile Include="../../src/TransparentTaskbar/Localization/*.cs" Link="Localization/%(Filename)%(Extension)" />
-    <EmbeddedResource Include="../../src/TransparentTaskbar/Localization/Strings*.resx" Link="Localization/%(Filename)%(Extension)" LogicalName="TransparentTaskbar.Localization.%(Filename).resources" />
+    <Compile Include="../../src/Glasscape/Wallpaper/*.cs" Link="Wallpaper/%(Filename)%(Extension)" />
+    <Compile Include="../../src/Glasscape/Settings/AppSettings.cs" Link="AppSettings.cs" />
+    <Compile Include="../../src/Glasscape/Localization/*.cs" Link="Localization/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../src/Glasscape/Localization/Strings*.resx" Link="Localization/%(Filename)%(Extension)" LogicalName="Glasscape.Localization.%(Filename).resources" />
   </ItemGroup>
 </Project>

@@ -60,7 +60,7 @@ function Get-GlasscapeSourceArchiveFiles {
     $root = [IO.Path]::GetFullPath($ProjectRoot).TrimEnd('\')
     Assert-GlasscapeNoReparsePath -Path $root
     $sourceRoots = @('src', 'tests', 'scripts', 'packaging', 'design', 'assets', 'docs', 'third_party')
-    $rootFiles = @('README.md', 'LICENSE.md', 'LICENSE-MIT.txt', 'LICENSE-GPL-3.0.md', 'THIRD_PARTY_NOTICES.md', 'PRIVACY.md', 'SUPPORT.md', 'SECURITY.md', 'SECURITY_REVIEW.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'CODE_OF_CONDUCT.md', 'TransparentTaskbar.slnx', 'global.json', 'Directory.Build.props', 'Directory.Build.targets', 'Directory.Packages.props', 'NuGet.config', '.gitignore', '.gitattributes')
+    $rootFiles = @('README.md', 'LICENSE.md', 'LICENSE-MIT.txt', 'LICENSE-GPL-3.0.md', 'THIRD_PARTY_NOTICES.md', 'PRIVACY.md', 'SUPPORT.md', 'SECURITY.md', 'SECURITY_REVIEW.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'CODE_OF_CONDUCT.md', 'Glasscape.slnx', 'global.json', 'Directory.Build.props', 'Directory.Build.targets', 'Directory.Packages.props', 'NuGet.config', '.gitignore', '.gitattributes')
     $ignoredDirectories = @('bin', 'obj', 'dist', 'artifacts', '.git', '.vs', '.superpowers', 'superpowers', 'generation-tools', 'win-x64', 'node_modules')
     $files = [Collections.Generic.List[IO.FileInfo]]::new()
     $directories = [Collections.Generic.Stack[IO.DirectoryInfo]]::new()

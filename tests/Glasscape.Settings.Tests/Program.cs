@@ -1,10 +1,58 @@
 using System.Text.Json;
-using TransparentTaskbar.Settings;
+using Glasscape.Settings;
 
 var temporaryRoot = Path.Combine(Path.GetTempPath(), "glasscape-settings-test-" + Guid.NewGuid().ToString("N"));
 Directory.CreateDirectory(temporaryRoot);
 var tests = new (string Name, Action Run)[]
 {
+    ("Renamed profile preserves legacy choices and relative wallpaper paths", () =>
+    {
+        var legacy = Folder("legacy-profile");
+        var current = Path.Combine(temporaryRoot, "current-profile");
+        var id = Guid.NewGuid();
+        var original = JsonSerializer.Serialize(new AppSettings
+        {
+            Language = "en-US", StartWithWindows = true, TaskbarOpacity = 63,
+            ActiveWallpaperId = id, BundledSamplesInitialized = true,
+            Wallpapers = [new() { Id = id, FilePath = "personal.mp4", ThumbnailPath = "personal.png", Title = "Personal" }]
+        });
+        File.WriteAllText(Path.Combine(legacy, "settings.json"), original);
+        var loaded = MigratingStore(current, legacy).Load();
+        Check(loaded.Language == "en-US" && loaded.StartWithWindows && loaded.TaskbarOpacity == 63, "Renaming must retain the user's preferences.");
+        Check(loaded.ActiveWallpaperId == id && loaded.Wallpapers.Single().FilePath == Path.Combine(legacy, "personal.mp4") && loaded.Wallpapers.Single().ThumbnailPath == Path.Combine(legacy, "personal.png"), "Relative legacy paths must still point at the original files.");
+        Check(File.ReadAllText(Path.Combine(legacy, "settings.json")) == original, "Migration must preserve the legacy source unchanged.");
+        Check(new SettingsStore(current).Load().TaskbarOpacity == 63, "Migrated choices must persist in the renamed profile.");
+    }),
+    ("Existing renamed profile takes precedence over legacy settings", () =>
+    {
+        var current = Folder("current-profile-precedence");
+        var legacy = Folder("legacy-profile-precedence");
+        new SettingsStore(current).Save(new AppSettings { TaskbarOpacity = 27 });
+        new SettingsStore(legacy).Save(new AppSettings { TaskbarOpacity = 81 });
+        Check(MigratingStore(current, legacy).Load().TaskbarOpacity == 27, "Legacy data must never overwrite a newer profile.");
+        Check(new SettingsStore(legacy).Load().TaskbarOpacity == 81, "Legacy settings must remain unchanged.");
+    }),
+    ("Installer upgrades recognize owned startup from an earlier version folder", () =>
+    {
+        var installRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Programs", "Glasscape");
+        var startup = new StartupService(Path.Combine(installRoot, "2.1.2", "Glasscape.exe"));
+        var previous = Path.Combine(installRoot, "2.1.0", string.Concat("Transparent", "Taskbar", ".exe"));
+        Check(OwnsLegacyRegistration(startup, $"\"{previous}\" --background"), "Explicit upgrade must be able to remove the previous installed app's startup entry.");
+    }),
+    ("Legacy startup matching preserves unrelated or malformed registrations", () =>
+    {
+        var installRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Programs", "Glasscape");
+        var startup = new StartupService(Path.Combine(installRoot, "2.1.2", "Glasscape.exe"));
+        var legacyExe = string.Concat("Transparent", "Taskbar", ".exe");
+        foreach (var registration in new[]
+        {
+            $"\"{Path.Combine(temporaryRoot, "2.1.0", legacyExe)}\" --background",
+            $"\"{Path.Combine(installRoot, "unrelated", legacyExe)}\" --background",
+            $"\"{Path.Combine(installRoot, "2.1.0", "other.exe")}\" --background",
+            $"\"{Path.Combine(installRoot, "2.1.0", legacyExe)}\" --background --extra"
+        }) Check(!OwnsLegacyRegistration(startup, registration), "Only the canonical prior app startup command under its versioned install root is owned.");
+        Check(!OwnsLegacyRegistration(new StartupService(Path.Combine(temporaryRoot, "Glasscape.exe")), $"\"{Path.Combine(installRoot, "2.1.0", legacyExe)}\" --background"), "A separate portable install must not take over the installed app's startup entry.");
+    }),
     ("Missing settings return safe defaults without writing a user profile", () =>
     {
         var folder = Path.Combine(temporaryRoot, "missing");
@@ -105,7 +153,7 @@ var tests = new (string Name, Action Run)[]
     }),
     ("Startup command safely quotes the complete executable path", () =>
     {
-        Check(StartupService.BuildCommand(@"C:\Program Files\Glasscape\TransparentTaskbar.exe") == "\"C:\\Program Files\\Glasscape\\TransparentTaskbar.exe\" --background", "Spaces must remain within the quoted executable path.");
+        Check(StartupService.BuildCommand(@"C:\Program Files\Glasscape\Glasscape.exe") == "\"C:\\Program Files\\Glasscape\\Glasscape.exe\" --background", "Spaces must remain within the quoted executable path.");
         Check(StartupService.BuildCommand(@"C:\Glasscape\app.exe") == "\"C:\\Glasscape\\app.exe\" --background", "The command must be canonical even without spaces.");
     }),
     ("Startup command rejects relative and injected executable paths", () =>
@@ -213,6 +261,14 @@ return failures == 0 ? 0 : 1;
 
 string Folder(string name) { var path = Path.Combine(temporaryRoot, name); Directory.CreateDirectory(path); return path; }
 SettingsStore Store(string name) => new(Path.Combine(temporaryRoot, name));
+static SettingsStore MigratingStore(string current, string legacy)
+{
+    return new SettingsStore(current, legacy);
+}
+static bool OwnsLegacyRegistration(StartupService startup, string registration)
+{
+    return startup.OwnsLegacyRegistration(registration);
+}
 string SampleFolder(string name)
 {
     var root = Folder(name);

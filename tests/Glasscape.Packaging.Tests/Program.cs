@@ -1,11 +1,11 @@
 using Microsoft.Win32;
-using TransparentTaskbar.Settings;
+using Glasscape.Settings;
 using Windows.ApplicationModel;
 
 var failures = 0;
 await Check("Unpackaged execution is detected without a Store dependency", () =>
 {
-    var identity = typeof(StartupService).Assembly.GetType("TransparentTaskbar.Packaging.PackageIdentity");
+    var identity = typeof(StartupService).Assembly.GetType("Glasscape.Packaging.PackageIdentity");
     if (identity?.GetProperty("IsPackaged")?.GetValue(null) is not false)
         throw new Exception("A portable test process must be detected as unpackaged.");
     return Task.CompletedTask;
@@ -13,14 +13,14 @@ await Check("Unpackaged execution is detected without a Store dependency", () =>
 await Check("Portable asynchronous startup read preserves the actual registration", async () =>
 {
     using var key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", false);
-    var before = key?.GetValue("TransparentTaskbar");
+    var before = key?.GetValue("Glasscape");
     var startup = new StartupService(Environment.ProcessPath!);
     var read = typeof(StartupService).GetMethod("GetIsEnabledAsync");
     if (read is null) throw new Exception("Startup has no asynchronous read API for the UI.");
     var enabled = await (Task<bool>)read.Invoke(startup, null)!;
     var expected = string.Equals(before as string, StartupService.BuildCommand(Environment.ProcessPath!), StringComparison.Ordinal);
     if (enabled != expected) throw new Exception("Portable startup state must match the exact quoted background command.");
-    if (!Equals(before, key?.GetValue("TransparentTaskbar"))) throw new Exception("Reading startup state changed the user's registration.");
+    if (!Equals(before, key?.GetValue("Glasscape"))) throw new Exception("Reading startup state changed the user's registration.");
 });
 await Check("Invalid executable paths are rejected before startup registration", () =>
 {

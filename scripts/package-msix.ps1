@@ -5,7 +5,7 @@ param(
     [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$Publisher,
     [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$PublisherDisplayName,
     [Parameter(Mandatory = $true)][ValidatePattern('^[A-Z0-9]{12}$')][string]$StoreId,
-    [ValidatePattern('^\d+\.\d+\.\d+\.\d+$')][string]$Version = '2.1.0.0',
+    [ValidatePattern('^\d+\.\d+\.\d+\.\d+$')][string]$Version = '2.1.2.0',
     [string]$OutputDirectory,
     [string]$SdkBinDirectory,
     [switch]$SkipBuild
@@ -58,11 +58,11 @@ New-Item -ItemType Directory -Path $stage -Force | Out-Null
 
 # Do not use single-file extraction from the read-only WindowsApps directory.
 if (-not $SkipBuild) {
-    dotnet publish (Join-Path $projectRoot 'src\TransparentTaskbar\TransparentTaskbar.csproj') -c Release -r win-x64 --self-contained true -o $stage -p:PublishSingleFile=false -p:DebugType=None -p:DebugSymbols=false -p:Version=$($packageVersion.ToString(3))
+    dotnet publish (Join-Path $projectRoot 'src\Glasscape\Glasscape.csproj') -c Release -r win-x64 --self-contained true -o $stage -p:PublishSingleFile=false -p:DebugType=None -p:DebugSymbols=false -p:Version=$($packageVersion.ToString(3))
     if ($LASTEXITCODE -ne 0) { throw 'Self-contained x64 publish failed.' }
 }
 Assert-GlasscapeReleaseTree -Root $stage
-foreach ($required in @('TransparentTaskbar.exe', 'TransparentTaskbar.dll', 'coreclr.dll', 'hostfxr.dll', 'WindowsBase.dll', 'WinRT.Runtime.dll', 'Microsoft.Windows.SDK.NET.dll', 'ExplorerTAP.dll', 'mpv\mpv.exe')) {
+foreach ($required in @('Glasscape.exe', 'Glasscape.dll', 'coreclr.dll', 'hostfxr.dll', 'WindowsBase.dll', 'WinRT.Runtime.dll', 'Microsoft.Windows.SDK.NET.dll', 'ExplorerTAP.dll', 'mpv\mpv.exe')) {
     if (-not (Test-Path -LiteralPath (Join-Path $stage $required))) { throw "Required self-contained/native payload is missing: $required" }
 }
 if ((Get-FileHash -LiteralPath (Join-Path $stage 'ExplorerTAP.dll') -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'c48f1a06168acd7839269dde0d15ccf5d09c702512b94dd6ba9a05df1b153dc2') { throw 'Packaged ExplorerTAP.dll does not match the pinned upstream binary.' }
@@ -97,8 +97,8 @@ Copy-Item -LiteralPath (Join-Path $mpvRoot 'licenses') -Destination $stage -Recu
 $frameworkLicenses = Join-Path $stage 'Framework-Licenses'
 New-Item -ItemType Directory -Path $frameworkLicenses -Force | Out-Null
 foreach ($license in Get-ChildItem -LiteralPath (Join-Path $projectRoot 'packaging\Licenses') -File) { Copy-Item -LiteralPath $license.FullName -Destination $frameworkLicenses -Force }
-$runtimeConfiguration = Get-Content -LiteralPath (Join-Path $stage 'TransparentTaskbar.runtimeconfig.json') -Raw | ConvertFrom-Json
-$nugetRoot = (& dotnet msbuild (Join-Path $projectRoot 'src\TransparentTaskbar\TransparentTaskbar.csproj') -getProperty:NuGetPackageRoot | Out-String).Trim()
+$runtimeConfiguration = Get-Content -LiteralPath (Join-Path $stage 'Glasscape.runtimeconfig.json') -Raw | ConvertFrom-Json
+$nugetRoot = (& dotnet msbuild (Join-Path $projectRoot 'src\Glasscape\Glasscape.csproj') -getProperty:NuGetPackageRoot | Out-String).Trim()
 if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $nugetRoot)) { throw 'Could not locate the restored runtime license texts.' }
 foreach ($framework in $runtimeConfiguration.runtimeOptions.includedFrameworks) {
     $id = $framework.name.ToLowerInvariant() + '.runtime.win-x64'

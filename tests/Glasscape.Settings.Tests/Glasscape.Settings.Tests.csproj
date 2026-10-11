@@ -7,9 +7,9 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../../src/TransparentTaskbar/Settings/*.cs" Link="Settings/%(Filename)%(Extension)" />
-    <Compile Include="../../src/TransparentTaskbar/Packaging/PackageIdentity.cs" Link="Packaging/PackageIdentity.cs" />
-    <Compile Include="../../src/TransparentTaskbar/Localization/*.cs" Link="Localization/%(Filename)%(Extension)" />
-    <EmbeddedResource Include="../../src/TransparentTaskbar/Localization/Strings*.resx" Link="Localization/%(Filename)%(Extension)" LogicalName="TransparentTaskbar.Localization.%(Filename).resources" />
+    <Compile Include="../../src/Glasscape/Settings/*.cs" Link="Settings/%(Filename)%(Extension)" />
+    <Compile Include="../../src/Glasscape/Packaging/PackageIdentity.cs" Link="Packaging/PackageIdentity.cs" />
+    <Compile Include="../../src/Glasscape/Localization/*.cs" Link="Localization/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../src/Glasscape/Localization/Strings*.resx" Link="Localization/%(Filename)%(Extension)" LogicalName="Glasscape.Localization.%(Filename).resources" />
   </ItemGroup>
 </Project>

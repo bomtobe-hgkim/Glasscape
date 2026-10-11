@@ -1,5 +1,5 @@
 using Microsoft.Win32;
-using TransparentTaskbar.Settings;
+using Glasscape.Settings;
 
 internal static class DesktopFeatureChecks
 {
@@ -18,7 +18,7 @@ internal static class DesktopFeatureChecks
         finally { hide.SetEnabled(originalHide); }
 
         const string path = @"Software\Microsoft\Windows\CurrentVersion\Run";
-        const string name = "TransparentTaskbar";
+        const string name = "Glasscape";
         using var key = Registry.CurrentUser.CreateSubKey(path, writable: true);
         var exists = key.GetValueNames().Contains(name);
         var original = exists ? key.GetValue(name) : null;

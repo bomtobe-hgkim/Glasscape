@@ -13,7 +13,7 @@ if ((Get-FileHash -LiteralPath $nativeDll -Algorithm SHA256).Hash.ToLowerInvaria
 }
 
 $distRoot = Join-Path $projectRoot 'dist'
-$publishRoot = Join-Path $distRoot 'TransparentTaskbar-win-x64'
+$publishRoot = Join-Path $distRoot 'Glasscape-win-x64'
 $sampleDestination = Join-Path $publishRoot 'samples'
 $sampleRoot = Join-Path $projectRoot 'assets\samples'
 $sampleFiles = @('aurora-flow.mp4', 'aurora-flow.png', 'ocean-drift.mp4', 'ocean-drift.png')
@@ -44,10 +44,10 @@ foreach ($line in Get-Content -LiteralPath (Join-Path $mpvRoot 'runtime.sha256')
 }
 New-Item -ItemType Directory -Force -Path $publishRoot | Out-Null
 if (-not $SkipBuild) {
-    dotnet publish (Join-Path $projectRoot 'src\TransparentTaskbar\TransparentTaskbar.csproj') -c Release -r win-x64 --self-contained true -o $publishRoot -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false
+    dotnet publish (Join-Path $projectRoot 'src\Glasscape\Glasscape.csproj') -c Release -r win-x64 --self-contained true -o $publishRoot -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false
     if ($LASTEXITCODE -ne 0) { throw 'dotnet publish failed.' }
 }
-if (-not (Test-Path -LiteralPath (Join-Path $publishRoot 'TransparentTaskbar.exe'))) { throw 'Published executable not found. Run without -SkipBuild first.' }
+if (-not (Test-Path -LiteralPath (Join-Path $publishRoot 'Glasscape.exe'))) { throw 'Published executable not found. Run without -SkipBuild first.' }
 
 Assert-ReleaseStaging
 New-Item -ItemType Directory -Path $sampleDestination -Force | Out-Null
@@ -66,18 +66,18 @@ New-Item -ItemType Directory -Path $licenseDestination -Force | Out-Null
 Copy-Item -Path (Join-Path $mpvRoot 'licenses\*') -Destination $licenseDestination -Recurse -Force
 Copy-Item -LiteralPath (Join-Path $projectRoot 'assets\samples\README.md') -Destination (Join-Path $publishRoot 'samples\README.md')
 Copy-Item -LiteralPath (Join-Path $projectRoot 'assets\samples\LICENSE-CC0.txt') -Destination (Join-Path $publishRoot 'samples\LICENSE-CC0.txt')
-Set-Content -LiteralPath (Join-Path $publishRoot 'Install-Glasscape.cmd') -Value '@start "" "%~dp0TransparentTaskbar.exe" --install' -Encoding Ascii
+Set-Content -LiteralPath (Join-Path $publishRoot 'Install-Glasscape.cmd') -Value '@start "" "%~dp0Glasscape.exe" --install' -Encoding Ascii
 
 Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
-$sourceArchive = Join-Path $publishRoot 'TransparentTaskbar-source.zip'
+$sourceArchive = Join-Path $publishRoot 'Glasscape-source.zip'
 Assert-ReleaseStaging
 New-GlasscapeSourceArchive -ProjectRoot $projectRoot -Destination $sourceArchive
 
-$portableArchive = Join-Path $distRoot 'TransparentTaskbar-win-x64.zip'
+$portableArchive = Join-Path $distRoot 'Glasscape-win-x64.zip'
 Assert-ReleaseStaging
 Assert-GlasscapeNoReparsePath -Path $portableArchive
 if (Test-Path -LiteralPath $portableArchive) { Remove-Item -LiteralPath $portableArchive }
 [IO.Compression.ZipFile]::CreateFromDirectory($publishRoot, $portableArchive, [IO.Compression.CompressionLevel]::Optimal, $true)
-Write-Host "Executable: $(Join-Path $publishRoot 'TransparentTaskbar.exe')"
+Write-Host "Executable: $(Join-Path $publishRoot 'Glasscape.exe')"
 Write-Host "Portable ZIP: $portableArchive"
 Write-Host "C# source: $sourceArchive"

@@ -12,7 +12,7 @@ C#으로 만든 Windows 데스크톱 설정 앱입니다. **작업표시줄 투�
 
 ## 실행과 설치
 
-`dist/TransparentTaskbar-win-x64.zip`을 압축 해제한 뒤 `TransparentTaskbar.exe`를 **일반 권한**으로 실행하세요. 실행 파일 이름은 기존 버전과 동일하고 화면에는 Glasscape로 표시됩니다. Windows 10/11 x64용이며 배포본에는 .NET 런타임이 포함됩니다. DLL과 `mpv`, `samples` 폴더도 함께 유지하세요.
+`dist/Glasscape-win-x64.zip`을 압축 해제한 뒤 `Glasscape.exe`를 **일반 권한**으로 실행하세요. 실행 파일과 프로젝트 이름도 Glasscape로 통일했습니다. Windows 10/11 x64용이며 배포본에는 .NET 런타임이 포함됩니다. DLL과 `mpv`, `samples` 폴더도 함께 유지하세요.
 
 포터블 버전을 안정적인 위치에 설치하려면 `Install-Glasscape.cmd`를 실행하거나 설정 화면의 **이 PC에 설치**를 누르세요. 사용자 프로그램 폴더 `%LOCALAPPDATA%/Programs/Glasscape/<버전>`에 복사하고 시작 메뉴에 바로가기를 만듭니다. 설치 화면에서 **Windows 로그인 시 자동으로 실행** 여부를 선택할 수 있습니다. 관리자 권한은 필요 없습니다. Microsoft Store 버전은 Windows의 패키지 설치·업데이트와 시작 작업을 사용하며 이 별도 복사 설치 버튼을 표시하지 않습니다.
 
@@ -41,7 +41,7 @@ C#으로 만든 Windows 데스크톱 설정 앱입니다. **작업표시줄 투�
 - 바탕화면 아이콘 뒤에서 재생하며 기존 정적 배경은 바꾸지 않습니다. 중지/종료하면 기존 배경이 다시 나타납니다.
 - 종료 시 소유한 재생기만 정리합니다. 재생기는 별도 프로세스와 종료 보호 Job Object를 사용합니다.
 
-설정은 `%LOCALAPPDATA%/TransparentTaskbar/settings.json`에 원자적으로 저장됩니다. 잘못된 JSON은 원본을 보존하고 안전한 기본 설정으로 복구합니다. 로그는 같은 폴더의 `app.log`에 저장됩니다.
+설정은 `%LOCALAPPDATA%/Glasscape/settings.json`에 원자적으로 저장됩니다. 새 폴더에 설정이 없으면 이전 앱의 설정을 읽어와 원본과 개인 영상 경로를 보존합니다. 잘못된 JSON은 원본을 보존하고 안전한 기본 설정으로 복구합니다. 로그는 같은 폴더의 `app.log`에 저장됩니다. 기존 자동 시작 항목은 읽기만으로 변경하지 않으며, 설치하거나 자동 시작을 켜거나 끌 때 같은 앱의 설치 경로로 확인된 이전 항목을 정리합니다.
 
 ## HTML 시안과 아이콘
 
@@ -51,7 +51,7 @@ C#으로 만든 Windows 데스크톱 설정 앱입니다. **작업표시줄 투�
 
 ## 빌드와 검증
 
-개발 시 Windows와 .NET 10 SDK가 필요합니다. `TransparentTaskbar.slnx`를 Visual Studio에서도 열 수 있습니다.
+개발 시 Windows와 .NET 10 SDK가 필요합니다. `Glasscape.slnx`를 Visual Studio에서도 열 수 있습니다.
 
 공개 저장소에는 외부 네이티브 실행 파일과 다운로드 아카이브가 포함되지 않습니다. 처음 빌드하기 전에 해시가 고정된 의존성을 복원하세요:
 
@@ -61,9 +61,9 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/fetch-mpv.ps1
 ```
 
 ```powershell
-dotnet build TransparentTaskbar.slnx -c Release
-dotnet run --project src/TransparentTaskbar -c Release
-dotnet run --project tests/TransparentTaskbar.Tests -c Release
+dotnet build Glasscape.slnx -c Release
+dotnet run --project src/Glasscape -c Release
+dotnet run --project tests/Glasscape.Tests -c Release
 dotnet run --project tests/Glasscape.Settings.Tests -c Release
 dotnet run --project tests/Glasscape.Wallpaper.Tests -c Release
 dotnet run --project tests/Glasscape.UI.Tests -c Release
@@ -84,7 +84,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/publish.ps1
 
 다운로드 해시를 검사한 공식 바이너리를 사용합니다. 샘플 생성용 FFmpeg는 실행 배포에 포함하지 않습니다. 샘플 재생은 mpv만 사용합니다.
 
-`tests/TransparentTaskbar.Integration/bin/Release/net10.0-windows10.0.19041.0/TransparentTaskbar.Integration.exe`는 실제 작업표시줄 투명화/복원을 검사합니다. `tests/Glasscape.Desktop.Integration/bin/Release/net10.0-windows10.0.19041.0/Glasscape.Desktop.Integration.exe`는 실제 자동 숨김/시작 항목 등록·해제와 동영상 프레임, 일시정지/재개, 모니터·입력·프로세스 정리를 검사합니다. 직접 실행할 경우 두 EXE를 파일 탐색기에서 일반 권한으로 실행하세요. 검증 중 잠시 창을 최소화하고 끝나면 복원하며, 시작 항목과 자동 숨김도 원래 상태로 복구합니다. 결과는 `artifacts/integration`에 저장됩니다. 개발 명령을 관리자 권한 터미널에서 실행했다면 테스트 EXE 자체는 파일 탐색기로 실행하세요.
+`tests/Glasscape.Integration/bin/Release/net10.0-windows10.0.19041.0/Glasscape.Integration.exe`는 실제 작업표시줄 투명화/복원을 검사합니다. `tests/Glasscape.Desktop.Integration/bin/Release/net10.0-windows10.0.19041.0/Glasscape.Desktop.Integration.exe`는 실제 자동 숨김/시작 항목 등록·해제와 동영상 프레임, 일시정지/재개, 모니터·입력·프로세스 정리를 검사합니다. 직접 실행할 경우 두 EXE를 파일 탐색기에서 일반 권한으로 실행하세요. 검증 중 잠시 창을 최소화하고 끝나면 복원하며, 시작 항목과 자동 숨김도 원래 상태로 복구합니다. 결과는 `artifacts/integration`에 저장됩니다. 개발 명령을 관리자 권한 터미널에서 실행했다면 테스트 EXE 자체는 파일 탐색기로 실행하세요.
 
 ## 호환성과 출처
 

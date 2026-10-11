@@ -1,5 +1,5 @@
 using System.Drawing;
-using TransparentTaskbar.Wallpaper;
+using Glasscape.Wallpaper;
 
 var monitors = new[]
 {

@@ -2,10 +2,10 @@ using System.Drawing.Imaging;
 using System.Reflection;
 using System.Text.Json;
 using System.Security.Cryptography;
-using TransparentTaskbar.Localization;
-using TransparentTaskbar.Settings;
-using TransparentTaskbar.UI;
-using TransparentTaskbar.Wallpaper;
+using Glasscape.Localization;
+using Glasscape.Settings;
+using Glasscape.UI;
+using Glasscape.Wallpaper;
 
 internal static class Program
 {
@@ -255,7 +255,7 @@ internal static class Program
     private static string WorkspaceRoot()
     {
         for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory is not null; directory = directory.Parent)
-            if (File.Exists(Path.Combine(directory.FullName, "TransparentTaskbar.slnx"))) return directory.FullName;
+            if (File.Exists(Path.Combine(directory.FullName, "Glasscape.slnx"))) return directory.FullName;
         throw new DirectoryNotFoundException("Run this harness from a Glasscape source checkout.");
     }
 

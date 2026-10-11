@@ -14,7 +14,7 @@ function Check([bool]$condition, [string]$message) {
 
 function New-PublishFixture([string]$name) {
     $root = Join-Path $fixtureRoot $name
-    foreach ($directory in @('scripts', 'packaging', 'src/Example', 'assets/samples', 'docs/public', 'docs/superpowers', '.superpowers', 'private', 'third_party/TranslucentTB/win-x64', 'third_party/mpv/win-x64', 'third_party/mpv/licenses', 'third_party/mpv/source', 'dist/TransparentTaskbar-win-x64')) {
+    foreach ($directory in @('scripts', 'packaging', 'src/Example', 'assets/samples', 'docs/public', 'docs/superpowers', '.superpowers', 'private', 'third_party/TranslucentTB/win-x64', 'third_party/mpv/win-x64', 'third_party/mpv/licenses', 'third_party/mpv/source', 'dist/Glasscape-win-x64')) {
         New-Item -ItemType Directory -Path (Join-Path $root $directory) -Force | Out-Null
     }
     Copy-Item -LiteralPath (Join-Path $projectRoot 'scripts/publish.ps1') -Destination (Join-Path $root 'scripts/publish.ps1')
@@ -22,7 +22,7 @@ function New-PublishFixture([string]$name) {
         if (Test-Path -LiteralPath (Join-Path $projectRoot "packaging/$helper")) { Copy-Item -LiteralPath (Join-Path $projectRoot "packaging/$helper") -Destination (Join-Path $root "packaging/$helper") }
     }
     Copy-Item -LiteralPath (Join-Path $projectRoot 'third_party/TranslucentTB/win-x64/ExplorerTAP.dll') -Destination (Join-Path $root 'third_party/TranslucentTB/win-x64/ExplorerTAP.dll')
-    foreach ($file in @('README.md', 'LICENSE.md', 'LICENSE-MIT.txt', 'LICENSE-GPL-3.0.md', 'THIRD_PARTY_NOTICES.md', 'PRIVACY.md', 'SUPPORT.md', 'SECURITY.md', 'src/Example/Program.cs', 'docs/public/guide.md', 'assets/samples/README.md', 'assets/samples/LICENSE-CC0.txt', 'third_party/TranslucentTB/NOTICE.md', 'third_party/TranslucentTB/TranslucentTB-2026.2-source.zip', 'third_party/mpv/NOTICE.md', 'third_party/mpv/licenses/LICENSE.txt', 'third_party/mpv/source/libexample.tar.gz', 'third_party/mpv/win-x64/mpv.exe', 'dist/TransparentTaskbar-win-x64/TransparentTaskbar.exe')) {
+    foreach ($file in @('README.md', 'LICENSE.md', 'LICENSE-MIT.txt', 'LICENSE-GPL-3.0.md', 'THIRD_PARTY_NOTICES.md', 'PRIVACY.md', 'SUPPORT.md', 'SECURITY.md', 'src/Example/Program.cs', 'docs/public/guide.md', 'assets/samples/README.md', 'assets/samples/LICENSE-CC0.txt', 'third_party/TranslucentTB/NOTICE.md', 'third_party/TranslucentTB/TranslucentTB-2026.2-source.zip', 'third_party/mpv/NOTICE.md', 'third_party/mpv/licenses/LICENSE.txt', 'third_party/mpv/source/libexample.tar.gz', 'third_party/mpv/win-x64/mpv.exe', 'dist/Glasscape-win-x64/Glasscape.exe')) {
         Set-Content -LiteralPath (Join-Path $root $file) -Value 'fixture' -Encoding Ascii
     }
     $mpvHash = (Get-FileHash -LiteralPath (Join-Path $root 'third_party/mpv/win-x64/mpv.exe') -Algorithm SHA256).Hash
@@ -42,7 +42,7 @@ function New-PublishFixture([string]$name) {
 Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
 try {
     $root = New-PublishFixture 'clean'
-    $stagingSamples = Join-Path $root 'dist/TransparentTaskbar-win-x64/samples'
+    $stagingSamples = Join-Path $root 'dist/Glasscape-win-x64/samples'
     New-Item -ItemType Directory -Path $stagingSamples -Force | Out-Null
     foreach ($file in $allowedMedia) {
         Set-Content -LiteralPath (Join-Path $stagingSamples $file) -Value 'stale' -Encoding Ascii
@@ -53,7 +53,7 @@ try {
     foreach ($file in $allowedMedia + $excludedMedia) {
         Check ((Get-Content -LiteralPath (Join-Path $root "assets/samples/$file") -Raw).Trim() -eq "source $file") "Source media is preserved: $file"
     }
-    foreach ($archivePath in @((Join-Path $root 'dist/TransparentTaskbar-win-x64/TransparentTaskbar-source.zip'), (Join-Path $root 'dist/TransparentTaskbar-win-x64.zip'))) {
+    foreach ($archivePath in @((Join-Path $root 'dist/Glasscape-win-x64/Glasscape-source.zip'), (Join-Path $root 'dist/Glasscape-win-x64.zip'))) {
         $archive = [IO.Compression.ZipFile]::OpenRead($archivePath)
         try {
             Check (@($archive.Entries | Where-Object { $_.Name -in $excludedMedia }).Count -eq 0) "Excluded media is absent from $([IO.Path]::GetFileName($archivePath))."
@@ -63,7 +63,7 @@ try {
             foreach ($file in @('LICENSE.md', 'LICENSE-MIT.txt', 'LICENSE-GPL-3.0.md', 'THIRD_PARTY_NOTICES.md', 'PRIVACY.md', 'SUPPORT.md', 'SECURITY.md')) {
                 Check (@($archive.Entries | Where-Object { $_.Name -eq $file }).Count -eq 1) "Licensing notice is included in $([IO.Path]::GetFileName($archivePath)): $file"
             }
-            if ([IO.Path]::GetFileName($archivePath) -eq 'TransparentTaskbar-source.zip') {
+            if ([IO.Path]::GetFileName($archivePath) -eq 'Glasscape-source.zip') {
                 foreach ($file in @('cloud-credentials.json', 'user-secrets.json', 'prod.env', 'user.suo', 'site.publishsettings')) {
                     Check (@($archive.Entries | Where-Object { $_.Name -eq $file }).Count -eq 0) "Shared private policy excludes $file from the portable source ZIP."
                 }
@@ -82,7 +82,7 @@ try {
     $personalRoot = Join-Path $fixtureRoot 'personal'
     New-Item -ItemType Directory -Path $personalRoot -Force | Out-Null
     Set-Content -LiteralPath (Join-Path $personalRoot 'rain.mp4') -Value 'personal video' -Encoding Ascii
-    $junction = Join-Path $junctionRoot 'dist/TransparentTaskbar-win-x64/samples'
+    $junction = Join-Path $junctionRoot 'dist/Glasscape-win-x64/samples'
     New-Item -ItemType Junction -Path $junction -Target $personalRoot | Out-Null
     $rejected = $false
     try { & (Join-Path $junctionRoot 'scripts/publish.ps1') -SkipBuild }
@@ -107,13 +107,13 @@ try {
     foreach ($bypass in @('nested/settings.json', 'nested/.env', 'samples/old/rain.mp4', 'nested/cloud-credentials.json', 'nested/user-secrets.json', 'nested/prod.env', 'nested/private.log', 'nested/user.suo', 'nested/site.publishsettings')) {
         foreach ($release in @('portable', 'msix')) {
             $caseRoot = New-PublishFixture ('stage-' + $release + '-' + [Guid]::NewGuid().ToString('N'))
-            if ($release -eq 'portable') { $stage = Join-Path $caseRoot 'dist/TransparentTaskbar-win-x64' }
+            if ($release -eq 'portable') { $stage = Join-Path $caseRoot 'dist/Glasscape-win-x64' }
             else { $stage = Join-Path $caseRoot 'dist/store/staging' }
             $privateFile = Join-Path $stage $bypass
             New-Item -ItemType Directory -Path (Split-Path -Parent $privateFile) -Force | Out-Null
             Set-Content -LiteralPath $privateFile -Value 'inert staged private fixture' -Encoding Ascii
-            $previousArchive = if ($release -eq 'portable') { Join-Path $caseRoot 'dist/TransparentTaskbar-win-x64.zip' } else { Join-Path $caseRoot 'dist/store/Glasscape_2.1.0.0_x64.msixbundle' }
-            Copy-Item -LiteralPath (Join-Path $root 'dist/TransparentTaskbar-win-x64.zip') -Destination $previousArchive
+            $previousArchive = if ($release -eq 'portable') { Join-Path $caseRoot 'dist/Glasscape-win-x64.zip' } else { Join-Path $caseRoot 'dist/store/Glasscape_2.1.0.0_x64.msixbundle' }
+            Copy-Item -LiteralPath (Join-Path $root 'dist/Glasscape-win-x64.zip') -Destination $previousArchive
             $previousHash = (Get-FileHash -LiteralPath $previousArchive -Algorithm SHA256).Hash
             $blocked = $false
             try {
@@ -135,7 +135,7 @@ try {
     foreach ($release in @('portable', 'msix')) {
         foreach ($linkType in @('Junction', 'SymbolicLink')) {
             $caseRoot = New-PublishFixture ('stage-link-' + [Guid]::NewGuid().ToString('N'))
-            $stage = if ($release -eq 'portable') { Join-Path $caseRoot 'dist/TransparentTaskbar-win-x64' } else { Join-Path $caseRoot 'dist/store/staging' }
+            $stage = if ($release -eq 'portable') { Join-Path $caseRoot 'dist/Glasscape-win-x64' } else { Join-Path $caseRoot 'dist/store/staging' }
             $nested = Join-Path $stage 'nested'
             New-Item -ItemType Directory -Path $nested -Force | Out-Null
             $outside = Join-Path $fixtureRoot ('outside-stage-' + [Guid]::NewGuid().ToString('N'))

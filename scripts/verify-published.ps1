@@ -6,10 +6,10 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-if (-not $Executable) { $Executable = Join-Path $PSScriptRoot '..\dist\TransparentTaskbar-win-x64\TransparentTaskbar.exe' }
+if (-not $Executable) { $Executable = Join-Path $PSScriptRoot '..\dist\Glasscape-win-x64\Glasscape.exe' }
 if (-not $OutputDirectory) { $OutputDirectory = Join-Path $PSScriptRoot '..\artifacts\published-verification' }
 $Executable = (Resolve-Path -LiteralPath $Executable).Path
-if (@(Get-Process -Name TransparentTaskbar -ErrorAction SilentlyContinue).Count) { throw 'Close the existing TransparentTaskbar process before testing.' }
+if (@(Get-Process -Name Glasscape -ErrorAction SilentlyContinue).Count) { throw 'Close the existing Glasscape process before testing.' }
 Add-Type -AssemblyName System.Windows.Forms, System.Drawing
 Add-Type -ReferencedAssemblies System.Drawing -TypeDefinition @'
 using System;
@@ -19,7 +19,7 @@ public static class PublishedTaskbarCheck {
     [StructLayout(LayoutKind.Sequential)] public struct Rect { public int Left, Top, Right, Bottom; }
     [StructLayout(LayoutKind.Sequential)] public struct AppBarData { public uint Size; public IntPtr Window; public uint Callback, Edge; public Rect Bounds; public IntPtr Parameter; }
     [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern IntPtr FindWindow(string cls, string title);
-    public static IntPtr MessageWindow() { return FindWindow(null, "TransparentTaskbar.Messages"); }
+    public static IntPtr MessageWindow() { return FindWindow(null, "Glasscape.Messages"); }
     [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr window, out uint pid);
     [DllImport("user32.dll", SetLastError=true)] public static extern bool PostThreadMessage(uint thread, uint message, IntPtr wParam, IntPtr lParam);
     [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr window, out Rect rect);
@@ -64,7 +64,7 @@ $owned = @{}
 $fixture = $null
 $images = @()
 $testStarted = Get-Date
-$settingsPath = Join-Path $env:LOCALAPPDATA 'TransparentTaskbar\settings.json'
+$settingsPath = Join-Path $env:LOCALAPPDATA 'Glasscape\settings.json'
 $hadSettings = Test-Path -LiteralPath $settingsPath
 $originalSettings = if ($hadSettings) { [IO.File]::ReadAllBytes($settingsPath) } else { $null }
 New-Item -ItemType Directory -Path (Split-Path -Parent $settingsPath) -Force | Out-Null
@@ -77,7 +77,7 @@ function Start-TestApp {
     $started = Get-Date
     Start-Process -FilePath "$env:WINDIR\explorer.exe" -ArgumentList ('"' + $Executable + '"') -WindowStyle Hidden
     for ($i=0; $i -lt 80; $i++) {
-        $p = @(Get-Process -Name TransparentTaskbar -ErrorAction SilentlyContinue | Where-Object { $_.Path -eq $Executable -and $_.StartTime -ge $started.AddSeconds(-1) })
+        $p = @(Get-Process -Name Glasscape -ErrorAction SilentlyContinue | Where-Object { $_.Path -eq $Executable -and $_.StartTime -ge $started.AddSeconds(-1) })
         if ($p.Count -eq 1) { $owned[$p[0].Id]=$p[0].StartTime; return $p[0] }
         Start-Sleep -Milliseconds 250
     }
@@ -115,7 +115,7 @@ try {
     # A second launch must leave the original owner as the only app process.
     Start-Process -FilePath "$env:WINDIR\explorer.exe" -ArgumentList ('"' + $Executable + '"') -WindowStyle Hidden
     Start-Sleep -Seconds 1
-    $instances = @(Get-Process -Name TransparentTaskbar -ErrorAction SilentlyContinue)
+    $instances = @(Get-Process -Name Glasscape -ErrorAction SilentlyContinue)
     if ($instances.Count -ne 1 -or $instances[0].Id -ne $app.Id) { throw 'Single-instance verification failed.' }
     $window = [PublishedTaskbarCheck]::MessageWindow()
     $appHandle = $app.Handle
@@ -150,7 +150,7 @@ finally {
     try {
         foreach ($id in @($owned.Keys)) { $remaining = Get-OwnedProcess $id; if ($null -ne $remaining) { Stop-Process -Id $remaining.Id -Force -ErrorAction SilentlyContinue } }
         # Handle a startup failure using the exact executable path and creation time.
-        Get-Process -Name TransparentTaskbar -ErrorAction SilentlyContinue | Where-Object { $_.Path -eq $Executable -and $_.StartTime -ge $testStarted } | ForEach-Object { Stop-Process -Id $_.Id -Force -ErrorAction SilentlyContinue }
+        Get-Process -Name Glasscape -ErrorAction SilentlyContinue | Where-Object { $_.Path -eq $Executable -and $_.StartTime -ge $testStarted } | ForEach-Object { Stop-Process -Id $_.Id -Force -ErrorAction SilentlyContinue }
     }
     finally {
         [void][PublishedTaskbarCheck]::State($taskbar, $savedState, $true)
