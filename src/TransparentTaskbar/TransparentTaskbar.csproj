@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>TransparentTaskbar</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <Version>2.1.0</Version>
+    <Product>Glasscape</Product>
+    <Description>Taskbar transparency and local video wallpapers for Windows.</Description>
+    <ApplicationIcon>../../assets/app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="../../third_party/TranslucentTB/win-x64/*.dll" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <Content Include="../../third_party/mpv/win-x64/*.exe;../../third_party/mpv/win-x64/*.dll;../../third_party/mpv/win-x64/*.com" Link="mpv/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <Content Include="../../assets/samples/aurora-flow.mp4;../../assets/samples/aurora-flow.png;../../assets/samples/ocean-drift.mp4;../../assets/samples/ocean-drift.png" Link="samples/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <EmbeddedResource Include="../../assets/app.ico" LogicalName="TransparentTaskbar.Assets.AppIcon.ico" />
+    <EmbeddedResource Include="../../assets/app-icon.png" LogicalName="TransparentTaskbar.Assets.AppIcon.png" />
+  </ItemGroup>
+</Project>

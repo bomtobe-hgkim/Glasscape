@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="WindowTitle" xml:space="preserve"><value>Glasscape · 데스크톱 스튜디오</value></data>
+  <data name="Footer" xml:space="preserve"><value>GLASSCAPE  ·  로컬 동영상으로 채우는 나만의 데스크톱</value></data>
+  <data name="SidebarCaption" xml:space="preserve"><value>내 데스크톱</value></data>
+  <data name="SidebarFooter" xml:space="preserve"><value>●  내 데스크톱 스튜디오
+로컬 파일 · 내 설정</value></data>
+  <data name="NavOverview" xml:space="preserve"><value>개요</value></data>
+  <data name="NavTaskbar" xml:space="preserve"><value>작업표시줄</value></data>
+  <data name="NavWallpaper" xml:space="preserve"><value>배경화면</value></data>
+  <data name="NavSettings" xml:space="preserve"><value>설정</value></data>
+  <data name="NavOverviewButton" xml:space="preserve"><value>▦   개요</value></data>
+  <data name="NavTaskbarButton" xml:space="preserve"><value>▤   작업표시줄</value></data>
+  <data name="NavWallpaperButton" xml:space="preserve"><value>▧   배경화면</value></data>
+  <data name="NavSettingsButton" xml:space="preserve"><value>⚙   설정</value></data>
+  <data name="OverviewTitle" xml:space="preserve"><value>풍경은 넓게. 화면은 가볍게.</value></data>
+  <data name="TaskbarTitle" xml:space="preserve"><value>작업표시줄의 작은 변화.</value></data>
+  <data name="WallpaperTitle" xml:space="preserve"><value>내 화면에 좋아하는 장면을.</value></data>
+  <data name="SettingsTitle" xml:space="preserve"><value>다음 시작도, 지금처럼.</value></data>
+  <data name="OverviewDescription" xml:space="preserve"><value>투명한 작업표시줄과 좋아하는 풍경을 함께 만나보세요.</value></data>
+  <data name="TaskbarDescription" xml:space="preserve"><value>배경 불투명도를 조절하고 Windows 자동 숨기기와 함께 사용하세요.</value></data>
+  <data name="WallpaperDescription" xml:space="preserve"><value>내 동영상을 가져오고 적용할 모니터를 골라보세요.</value></data>
+  <data name="SettingsDescription" xml:space="preserve"><value>시작 방식과 재생 정책을 원하는 대로 구성해보세요.</value></data>
+  <data name="DesktopPreview" xml:space="preserve"><value>데스크톱 미리보기</value></data>
+  <data name="PreviewAccessible" xml:space="preserve"><value>정지 이미지로 보여주는 데스크톱 설정 미리보기</value></data>
+  <data name="PreviewExample" xml:space="preserve"><value>GLASSCAPE · 장면 예시</value></data>
+  <data name="PreviewThumbnailCaption" xml:space="preserve"><value>LOCAL COLLECTION · 썸네일</value></data>
+  <data name="PreviewThumbnailNote" xml:space="preserve"><value>선택한 동영상의 썸네일 · 정지 미리보기</value></data>
+  <data name="PreviewSampleNote" xml:space="preserve"><value>설정 미리보기용 장면 · 실제 재생 화면이 아닙니다.</value></data>
+  <data name="EmptyScene" xml:space="preserve"><value>아직 담지 않은 풍경</value></data>
+  <data name="PreviewPaused" xml:space="preserve"><value>Ⅱ  일시정지</value></data>
+  <data name="PrimaryMonitor" xml:space="preserve"><value>주 모니터</value></data>
+  <data name="ChooseMonitor" xml:space="preserve"><value>모니터 선택</value></data>
+  <data name="SelectedMonitor" xml:space="preserve"><value>선택한 모니터</value></data>
+  <data name="AllMonitors" xml:space="preserve"><value>모든 모니터</value></data>
+  <data name="TaskbarSection" xml:space="preserve"><value>작업표시줄</value></data>
+  <data name="TaskbarSectionTitle" xml:space="preserve"><value>투명함의 정도</value></data>
+  <data name="TaskbarEnabled" xml:space="preserve"><value>작업표시줄 투명화</value></data>
+  <data name="TaskbarEnabledHelp" xml:space="preserve"><value>배경화면이 자연스럽게 이어집니다.</value></data>
+  <data name="TaskbarOpacity" xml:space="preserve"><value>배경 불투명도</value></data>
+  <data name="TaskbarOpacityAccessible" xml:space="preserve"><value>작업표시줄 배경 불투명도</value></data>
+  <data name="TaskbarOpacityHelp" xml:space="preserve"><value>0%는 완전 투명, 100%는 불투명입니다.</value></data>
+  <data name="TaskbarAutoHide" xml:space="preserve"><value>작업표시줄 자동 숨김</value></data>
+  <data name="TaskbarAutoHideHelp" xml:space="preserve"><value>포인터가 화면 아래에 닿으면 표시됩니다.</value></data>
+  <data name="WindowsTaskbarSettings" xml:space="preserve"><value>Windows 자동 숨기기 설정</value></data>
+  <data name="WindowsTaskbarSettingsAccessible" xml:space="preserve"><value>Windows 작업표시줄 설정 열기</value></data>
+  <data name="AutoHideHelp" xml:space="preserve"><value>자동 숨김과 투명화는 함께 사용할 수 있어요.</value></data>
+  <data name="WallpaperSection" xml:space="preserve"><value>배경화면</value></data>
+  <data name="WallpaperSectionTitle" xml:space="preserve"><value>풍경을 다루는 방법</value></data>
+  <data name="WallpaperFit" xml:space="preserve"><value>화면 채우기</value></data>
+  <data name="Fill" xml:space="preserve"><value>꽉 채우기</value></data>
+  <data name="Fit" xml:space="preserve"><value>화면에 맞추기</value></data>
+  <data name="MonitorMode" xml:space="preserve"><value>적용할 화면</value></data>
+  <data name="Monitor" xml:space="preserve"><value>모니터</value></data>
+  <data name="Muted" xml:space="preserve"><value>소리 끄기</value></data>
+  <data name="MutedHelp" xml:space="preserve"><value>배경화면은 기본으로 무음이에요.</value></data>
+  <data name="Volume" xml:space="preserve"><value>동영상 음량</value></data>
+  <data name="SettingsSection" xml:space="preserve"><value>사용 환경</value></data>
+  <data name="SettingsSectionTitle" xml:space="preserve"><value>익숙하고 편안하게</value></data>
+  <data name="Startup" xml:space="preserve"><value>Windows와 함께 시작</value></data>
+  <data name="StartupHelp" xml:space="preserve"><value>로그인하면 이전 풍경을 이어갑니다.</value></data>
+  <data name="Fullscreen" xml:space="preserve"><value>전체 화면에서 일시정지</value></data>
+  <data name="FullscreenHelp" xml:space="preserve"><value>게임과 영상에 집중할 수 있도록.</value></data>
+  <data name="Battery" xml:space="preserve"><value>배터리 사용 중 일시정지</value></data>
+  <data name="BatteryHelp" xml:space="preserve"><value>전원 연결 전까지 재생을 멈춥니다.</value></data>
+  <data name="TrayHelp" xml:space="preserve"><value>창을 닫으면 트레이에서 계속 실행됩니다.
+완전히 종료하려면 트레이 메뉴를 사용하세요.</value></data>
+  <data name="Install" xml:space="preserve"><value>이 PC에 설치</value></data>
+  <data name="Language" xml:space="preserve"><value>언어</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>시스템 언어</value></data>
+  <data name="LanguageEnglish" xml:space="preserve"><value>English</value></data>
+  <data name="LanguageKorean" xml:space="preserve"><value>한국어</value></data>
+  <data name="LanguageHelp" xml:space="preserve"><value>선택한 언어가 즉시 적용되고 저장됩니다.</value></data>
+  <data name="MyWallpapers" xml:space="preserve"><value>내 배경화면</value></data>
+  <data name="ImportVideo" xml:space="preserve"><value>＋ 동영상 가져오기</value></data>
+  <data name="ImportVideoAccessible" xml:space="preserve"><value>동영상 가져오기</value></data>
+  <data name="ApplyVideo" xml:space="preserve"><value>선택한 영상 적용</value></data>
+  <data name="RemoveVideo" xml:space="preserve"><value>라이브러리에서 제거</value></data>
+  <data name="Pause" xml:space="preserve"><value>일시정지</value></data>
+  <data name="Play" xml:space="preserve"><value>재생</value></data>
+  <data name="StopWallpaper" xml:space="preserve"><value>배경화면 중지</value></data>
+  <data name="PlaybackIdle" xml:space="preserve"><value>동영상을 가져오고 적용하면 데스크톱에서 재생됩니다.</value></data>
+  <data name="PlaybackRunning" xml:space="preserve"><value>{0} · 모니터 {1}개에서 재생 중</value></data>
+  <data name="PlaybackPaused" xml:space="preserve"><value>{0} · {1}</value></data>
+  <data name="AllMonitorsDetail" xml:space="preserve"><value>모든 모니터 · 연결된 화면 {0}개</value></data>
+  <data name="NoMonitors" xml:space="preserve"><value>연결된 모니터가 없습니다.</value></data>
+  <data name="EmptyLibrary" xml:space="preserve"><value>＋  내 동영상을 가져오거나 이곳에 놓으세요
+MP4 · MKV · WebM · MOV · AVI · WMV</value></data>
+  <data name="LocalVideo" xml:space="preserve"><value>{0} · 로컬 영상</value></data>
+  <data name="FileMissing" xml:space="preserve"><value>파일을 찾을 수 없음</value></data>
+  <data name="VideoPickerTitle" xml:space="preserve"><value>배경화면으로 사용할 동영상</value></data>
+  <data name="VideoFilter" xml:space="preserve"><value>동영상|*.mp4;*.mkv;*.webm;*.mov;*.avi;*.wmv</value></data>
+  <data name="VideoFormatError" xml:space="preserve"><value>MP4, MKV, WebM, MOV, AVI 또는 WMV 동영상 파일을 선택해주세요.</value></data>
+  <data name="TaskbarConnecting" xml:space="preserve"><value>작업표시줄 연결 중</value></data>
+  <data name="TaskbarWaiting" xml:space="preserve"><value>작업표시줄 연결 대기 중</value></data>
+  <data name="TaskbarRetrying" xml:space="preserve"><value>작업표시줄 적용 실패 · 재시도 중</value></data>
+  <data name="TaskbarApplied" xml:space="preserve"><value>작업표시줄 투명화 적용됨</value></data>
+  <data name="TaskbarDefault" xml:space="preserve"><value>Windows 기본 작업표시줄</value></data>
+  <data name="TrayOpen" xml:space="preserve"><value>설정 열기</value></data>
+  <data name="TrayPause" xml:space="preserve"><value>동영상 일시정지</value></data>
+  <data name="TrayPlay" xml:space="preserve"><value>동영상 재생</value></data>
+  <data name="TrayExit" xml:space="preserve"><value>종료</value></data>
+  <data name="TrayIdle" xml:space="preserve"><value>Glasscape · 데스크톱 설정</value></data>
+  <data name="TrayPlaying" xml:space="preserve"><value>Glasscape · 동영상 배경화면 재생 중</value></data>
+  <data name="TrayPaused" xml:space="preserve"><value>Glasscape · 동영상 일시정지</value></data>
+  <data name="SettingsLoadWarning" xml:space="preserve"><value>저장된 설정을 읽을 수 없어 기본 설정을 불러왔습니다. 기존 파일은 보존했습니다.</value></data>
+  <data name="VideoImported" xml:space="preserve"><value>동영상을 가져왔습니다. 원본 파일은 이동하거나 변경하지 않습니다.</value></data>
+  <data name="VideoNotFound" xml:space="preserve"><value>동영상 파일을 찾을 수 없습니다.</value></data>
+  <data name="ExecutableNotFound" xml:space="preserve"><value>실행 파일 경로를 찾을 수 없습니다.</value></data>
+  <data name="ConflictingApp" xml:space="preserve"><value>TranslucentTB가 실행 중입니다. 기존 앱을 종료한 뒤 다시 실행하세요.</value></data>
+  <data name="ErrorTitle" xml:space="preserve"><value>Glasscape 오류</value></data>
+  <data name="StartupDenied" xml:space="preserve"><value>Windows에서 자동 시작을 허용하지 않았습니다. Windows 설정의 시작 앱을 확인하세요.</value></data>
+  <data name="AuroraFlow" xml:space="preserve"><value>오로라의 흐름</value></data>
+  <data name="OceanDrift" xml:space="preserve"><value>느린 바다</value></data>
+  <data name="InstallerTitle" xml:space="preserve"><value>Glasscape 설치</value></data>
+  <data name="InstallerHeading" xml:space="preserve"><value>다음 로그인에도, 같은 데스크톱으로</value></data>
+  <data name="InstallerExplanation" xml:space="preserve"><value>사용자 프로그램 폴더에 설치하고 시작 메뉴에 바로가기를 만듭니다.
+관리자 권한은 필요하지 않습니다. 설정과 원본 동영상은 보존합니다.</value></data>
+  <data name="InstallerStartup" xml:space="preserve"><value>Windows 로그인 시 자동으로 실행</value></data>
+  <data name="InstallerButton" xml:space="preserve"><value>내 계정에 설치</value></data>
+  <data name="InstallerCopying" xml:space="preserve"><value>프로그램 파일을 복사하는 중입니다…</value></data>
+  <data name="InstallerSourceParent" xml:space="preserve"><value>설치 대상의 상위 폴더에서 설치할 수 없습니다. ZIP을 다른 폴더에 압축 해제하고 실행하세요.</value></data>
+  <data name="InstallerInvalidPath" xml:space="preserve"><value>잘못된 설치 파일 경로입니다.</value></data>
+  <data name="InstallerMissingExe" xml:space="preserve"><value>실행 파일이 설치되지 않았습니다.</value></data>
+  <data name="InstallerFailed" xml:space="preserve"><value>설치하지 못했습니다. 실행 중인 설치본을 종료한 뒤 다시 시도하세요.
+{0}</value></data>
+  <data name="InstallerShortcutFailed" xml:space="preserve"><value>시작 메뉴 바로가기를 만들 수 없습니다.</value></data>
+  <data name="InstallerShortcutDescription" xml:space="preserve"><value>Glasscape · 작업표시줄과 동영상 배경화면</value></data>
+  <data name="WallpaperMissingEntry" xml:space="preserve"><value>선택한 배경을 라이브러리에서 찾을 수 없습니다. 동영상을 다시 선택하세요.</value></data>
+  <data name="WallpaperInvalidPath" xml:space="preserve"><value>동영상 경로가 올바르지 않습니다. 파일을 다시 선택하세요.</value></data>
+  <data name="WallpaperMissingFile" xml:space="preserve"><value>동영상 파일을 찾을 수 없습니다. 파일을 원래 위치로 옮기거나 다시 추가하세요: {0}</value></data>
+  <data name="WallpaperMissingPlayer" xml:space="preserve"><value>동영상 재생기가 없습니다. Glasscape를 복구하거나 다시 설치하세요 (mpv\mpv.exe).</value></data>
+  <data name="WallpaperMissingMonitor" xml:space="preserve"><value>선택한 모니터가 연결되어 있지 않습니다. 다시 연결하거나 다른 모니터를 선택하세요.</value></data>
+  <data name="WallpaperNoMonitor" xml:space="preserve"><value>연결된 모니터를 찾을 수 없습니다.</value></data>
+  <data name="WallpaperReconnectStopped" xml:space="preserve"><value> 자동 재연결을 중단했습니다. 다시 적용해 주세요.</value></data>
+  <data name="WallpaperSomeMonitors" xml:space="preserve"><value>일부 모니터: {0}</value></data>
+  <data name="WallpaperPreparing" xml:space="preserve"><value>동영상 준비 중</value></data>
+  <data name="PauseUser" xml:space="preserve"><value>사용자 일시 정지</value></data>
+  <data name="PauseLocked" xml:space="preserve"><value>화면 잠금</value></data>
+  <data name="PauseSuspended" xml:space="preserve"><value>절전 모드</value></data>
+  <data name="PauseBattery" xml:space="preserve"><value>배터리 또는 절전 상태</value></data>
+  <data name="PauseFullscreen" xml:space="preserve"><value>전체 화면 앱</value></data>
+  <data name="DesktopNotFound" xml:space="preserve"><value>Windows 바탕화면을 찾을 수 없습니다. 탐색기가 준비된 후 다시 적용하세요.</value></data>
+  <data name="DesktopNotReady" xml:space="preserve"><value>Windows 바탕화면 레이어가 아직 준비되지 않았습니다. 잠시 후 다시 적용하세요.</value></data>
+  <data name="DesktopRestarted" xml:space="preserve"><value>Windows 바탕화면이 다시 시작되었습니다. 배경을 다시 연결합니다.</value></data>
+  <data name="DesktopRenderFailed" xml:space="preserve"><value>바탕화면 창의 렌더링 레이어를 설정하지 못했습니다.</value></data>
+  <data name="DesktopAttachFailed" xml:space="preserve"><value>동영상 창을 Windows 바탕화면에 연결하지 못했습니다.</value></data>
+  <data name="DesktopPositionFailed" xml:space="preserve"><value>동영상 배경의 모니터 위치를 설정하지 못했습니다.</value></data>
+  <data name="PlayerStartFailed" xml:space="preserve"><value>동영상 재생기를 시작하지 못했습니다.</value></data>
+  <data name="PlayerOpenFailed" xml:space="preserve"><value>동영상 파일을 열지 못했습니다. 파일이 손상되었거나 지원하지 않는 형식일 수 있습니다.</value></data>
+  <data name="PlayerTimeout" xml:space="preserve"><value>동영상 재생기의 응답 시간이 초과되었습니다. 다른 MP4 파일로 다시 적용해 보세요.</value></data>
+  <data name="PlayerConnectFailed" xml:space="preserve"><value>동영상 재생기를 연결하지 못했습니다: {0}</value></data>
+  <data name="PlayerResponseTooLarge" xml:space="preserve"><value>재생기 응답이 너무 큽니다.</value></data>
+  <data name="PlayerInvalidVideo" xml:space="preserve"><value>이 동영상은 재생할 수 없습니다. 파일이 손상되었거나 영상 트랙이 없을 수 있습니다.</value></data>
+  <data name="PlayerDisconnected" xml:space="preserve"><value>동영상 재생기와의 연결이 끊어졌습니다. 다시 적용해 주세요.</value></data>
+  <data name="PlayerCommunicationError" xml:space="preserve"><value>동영상 재생기 통신 오류: {0}</value></data>
+  <data name="PlayerNotReady" xml:space="preserve"><value>재생기 연결이 아직 준비되지 않았습니다.</value></data>
+  <data name="PlayerSettingsFailed" xml:space="preserve"><value>동영상 재생 설정을 적용하지 못했습니다: {0}</value></data>
+  <data name="PlayerExited" xml:space="preserve"><value>동영상 재생기가 종료되었습니다 (코드 {0}). 다시 적용해 주세요.</value></data>
+  <data name="PlayerJobFailed" xml:space="preserve"><value>동영상 재생 프로세스의 종료 보호를 설정하지 못했습니다.</value></data>
+  <data name="TaskbarUnsupported" xml:space="preserve"><value>작업표시줄이 준비되지 않았거나 지원되지 않는 Windows 버전입니다.</value></data>
+  <data name="TaskbarMissingModule" xml:space="preserve"><value>ExplorerTAP.dll을 실행 파일과 같은 폴더에 두세요.</value></data>
+  <data name="TaskbarNotConnected" xml:space="preserve"><value>Explorer에 연결되지 않았습니다.</value></data>
+  <data name="TaskbarTransparencyFailed" xml:space="preserve"><value>작업표시줄 투명화에 실패했습니다.</value></data>
+  <data name="TaskbarRestoreFailed" xml:space="preserve"><value>작업표시줄 복원에 실패했습니다.</value></data>
+  <data name="TaskbarOldModule" xml:space="preserve"><value>Explorer에 이전 버전 모듈이 남아 있습니다. Windows를 다시 시작한 뒤 실행하세요.</value></data>
+  <data name="TaskbarAccessDenied" xml:space="preserve"><value>Explorer 접근이 거부되었습니다. 일반 사용자 권한으로 실행하세요.</value></data>
+  <data name="TaskbarServiceMissing" xml:space="preserve"><value>Explorer 서비스를 찾을 수 없습니다. 관리자 권한을 해제하고 파일 탐색기에서 실행하세요.</value></data>
+  <data name="TaskbarConnectTimeout" xml:space="preserve"><value>Explorer 연결 시간이 초과되었습니다. 잠시 후 다시 시도합니다.</value></data>
+  <data name="TaskbarOtherApp" xml:space="preserve"><value>다른 투명화 앱의 종료 처리가 끝나기를 기다리고 있습니다.</value></data>
+  <data name="TaskbarFailed" xml:space="preserve"><value>작업표시줄 처리에 실패했습니다.</value></data>
+  <data name="AutoHideFailed" xml:space="preserve"><value>자동 숨김 설정을 적용하지 못했습니다. Windows 작업표시줄 설정을 확인하세요.</value></data>
+  <data name="AutoHideNotReady" xml:space="preserve"><value>Windows 작업표시줄이 아직 준비되지 않았습니다.</value></data>
+</root>
+

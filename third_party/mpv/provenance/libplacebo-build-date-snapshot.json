@@ -1,0 +1,82 @@
+{
+  "sha": "47587a2d47299f7261a01b77e989b74f80a99769",
+  "node_id": "C_kwDOBlKUD9oAKDQ3NTg3YTJkNDcyOTlmNzI2MWEwMWI3N2U5ODliNzRmODBhOTk3Njk",
+  "commit": {
+    "author": {
+      "name": "Niklas Haas",
+      "email": "git@haasn.dev",
+      "date": "2025-12-19T13:43:46Z"
+    },
+    "committer": {
+      "name": "Niklas Haas",
+      "email": "git@haasn.dev",
+      "date": "2025-12-19T13:45:26Z"
+    },
+    "message": "RELEASING.md: update release process",
+    "tree": {
+      "sha": "c23e470b866db08fbf83207acf5b178af0c695a4",
+      "url": "https://api.github.com/repos/haasn/libplacebo/git/trees/c23e470b866db08fbf83207acf5b178af0c695a4"
+    },
+    "url": "https://api.github.com/repos/haasn/libplacebo/git/commits/47587a2d47299f7261a01b77e989b74f80a99769",
+    "comment_count": 0,
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "url": "https://api.github.com/repos/haasn/libplacebo/commits/47587a2d47299f7261a01b77e989b74f80a99769",
+  "html_url": "https://github.com/haasn/libplacebo/commit/47587a2d47299f7261a01b77e989b74f80a99769",
+  "comments_url": "https://api.github.com/repos/haasn/libplacebo/commits/47587a2d47299f7261a01b77e989b74f80a99769/comments",
+  "author": {
+    "login": "haasn",
+    "id": 1149047,
+    "node_id": "MDQ6VXNlcjExNDkwNDc=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1149047?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/haasn",
+    "html_url": "https://github.com/haasn",
+    "followers_url": "https://api.github.com/users/haasn/followers",
+    "following_url": "https://api.github.com/users/haasn/following{/other_user}",
+    "gists_url": "https://api.github.com/users/haasn/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/haasn/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/haasn/subscriptions",
+    "organizations_url": "https://api.github.com/users/haasn/orgs",
+    "repos_url": "https://api.github.com/users/haasn/repos",
+    "events_url": "https://api.github.com/users/haasn/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/haasn/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "haasn",
+    "id": 1149047,
+    "node_id": "MDQ6VXNlcjExNDkwNDc=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/1149047?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/haasn",
+    "html_url": "https://github.com/haasn",
+    "followers_url": "https://api.github.com/users/haasn/followers",
+    "following_url": "https://api.github.com/users/haasn/following{/other_user}",
+    "gists_url": "https://api.github.com/users/haasn/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/haasn/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/haasn/subscriptions",
+    "organizations_url": "https://api.github.com/users/haasn/orgs",
+    "repos_url": "https://api.github.com/users/haasn/repos",
+    "events_url": "https://api.github.com/users/haasn/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/haasn/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "10b9481bb3c610ab6c45d1a4a757a00fe2403f79",
+      "url": "https://api.github.com/repos/haasn/libplacebo/commits/10b9481bb3c610ab6c45d1a4a757a00fe2403f79",
+      "html_url": "https://github.com/haasn/libplacebo/commit/10b9481bb3c610ab6c45d1a4a757a00fe2403f79"
+    }
+  ]
+}

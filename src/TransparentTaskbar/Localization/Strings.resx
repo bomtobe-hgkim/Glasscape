@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="WindowTitle" xml:space="preserve"><value>Glasscape · Desktop Studio</value></data>
+  <data name="Footer" xml:space="preserve"><value>GLASSCAPE  ·  YOUR DESKTOP, WITH LOCAL VIDEO</value></data>
+  <data name="SidebarCaption" xml:space="preserve"><value>MY DESKTOP</value></data>
+  <data name="SidebarFooter" xml:space="preserve"><value>●  Your desktop studio
+Local files · Your settings</value></data>
+  <data name="NavOverview" xml:space="preserve"><value>Overview</value></data>
+  <data name="NavTaskbar" xml:space="preserve"><value>Taskbar</value></data>
+  <data name="NavWallpaper" xml:space="preserve"><value>Wallpaper</value></data>
+  <data name="NavSettings" xml:space="preserve"><value>Settings</value></data>
+  <data name="NavOverviewButton" xml:space="preserve"><value>▦   Overview</value></data>
+  <data name="NavTaskbarButton" xml:space="preserve"><value>▤   Taskbar</value></data>
+  <data name="NavWallpaperButton" xml:space="preserve"><value>▧   Wallpaper</value></data>
+  <data name="NavSettingsButton" xml:space="preserve"><value>⚙   Settings</value></data>
+  <data name="OverviewTitle" xml:space="preserve"><value>More scenery. Less distraction.</value></data>
+  <data name="TaskbarTitle" xml:space="preserve"><value>A small change to your taskbar.</value></data>
+  <data name="WallpaperTitle" xml:space="preserve"><value>Your favorite scene, on your screen.</value></data>
+  <data name="SettingsTitle" xml:space="preserve"><value>Make yourself at home.</value></data>
+  <data name="OverviewDescription" xml:space="preserve"><value>Enjoy a transparent taskbar and a view you love.</value></data>
+  <data name="TaskbarDescription" xml:space="preserve"><value>Adjust opacity and combine it with Windows auto-hide.</value></data>
+  <data name="WallpaperDescription" xml:space="preserve"><value>Import a local video and choose where to play it.</value></data>
+  <data name="SettingsDescription" xml:space="preserve"><value>Choose how Glasscape starts and when your videos pause.</value></data>
+  <data name="DesktopPreview" xml:space="preserve"><value>Desktop preview</value></data>
+  <data name="PreviewAccessible" xml:space="preserve"><value>Desktop settings preview using a still image</value></data>
+  <data name="PreviewExample" xml:space="preserve"><value>GLASSCAPE · SAMPLE SCENE</value></data>
+  <data name="PreviewThumbnailCaption" xml:space="preserve"><value>LOCAL COLLECTION · THUMBNAIL</value></data>
+  <data name="PreviewThumbnailNote" xml:space="preserve"><value>Video thumbnail · still preview</value></data>
+  <data name="PreviewSampleNote" xml:space="preserve"><value>Settings preview · not live playback</value></data>
+  <data name="EmptyScene" xml:space="preserve"><value>A scene waiting for you</value></data>
+  <data name="PreviewPaused" xml:space="preserve"><value>Ⅱ  Paused</value></data>
+  <data name="PrimaryMonitor" xml:space="preserve"><value>Primary monitor</value></data>
+  <data name="ChooseMonitor" xml:space="preserve"><value>Choose monitor</value></data>
+  <data name="SelectedMonitor" xml:space="preserve"><value>Selected monitor</value></data>
+  <data name="AllMonitors" xml:space="preserve"><value>All monitors</value></data>
+  <data name="TaskbarSection" xml:space="preserve"><value>TASKBAR</value></data>
+  <data name="TaskbarSectionTitle" xml:space="preserve"><value>A lighter taskbar</value></data>
+  <data name="TaskbarEnabled" xml:space="preserve"><value>Transparent taskbar</value></data>
+  <data name="TaskbarEnabledHelp" xml:space="preserve"><value>Let your wallpaper shine through.</value></data>
+  <data name="TaskbarOpacity" xml:space="preserve"><value>Background opacity</value></data>
+  <data name="TaskbarOpacityAccessible" xml:space="preserve"><value>Taskbar background opacity</value></data>
+  <data name="TaskbarOpacityHelp" xml:space="preserve"><value>0% is transparent. 100% is opaque.</value></data>
+  <data name="TaskbarAutoHide" xml:space="preserve"><value>Auto-hide taskbar</value></data>
+  <data name="TaskbarAutoHideHelp" xml:space="preserve"><value>Move the pointer to the edge to reveal it.</value></data>
+  <data name="WindowsTaskbarSettings" xml:space="preserve"><value>Windows taskbar settings</value></data>
+  <data name="WindowsTaskbarSettingsAccessible" xml:space="preserve"><value>Open Windows taskbar settings</value></data>
+  <data name="AutoHideHelp" xml:space="preserve"><value>Auto-hide also works with transparency.</value></data>
+  <data name="WallpaperSection" xml:space="preserve"><value>WALLPAPER</value></data>
+  <data name="WallpaperSectionTitle" xml:space="preserve"><value>Shape your scenery</value></data>
+  <data name="WallpaperFit" xml:space="preserve"><value>Video sizing</value></data>
+  <data name="Fill" xml:space="preserve"><value>Fill screen</value></data>
+  <data name="Fit" xml:space="preserve"><value>Fit to screen</value></data>
+  <data name="MonitorMode" xml:space="preserve"><value>Display target</value></data>
+  <data name="Monitor" xml:space="preserve"><value>Monitor</value></data>
+  <data name="Muted" xml:space="preserve"><value>Mute audio</value></data>
+  <data name="MutedHelp" xml:space="preserve"><value>Wallpapers are silent by default.</value></data>
+  <data name="Volume" xml:space="preserve"><value>Video volume</value></data>
+  <data name="SettingsSection" xml:space="preserve"><value>PREFERENCES</value></data>
+  <data name="SettingsSectionTitle" xml:space="preserve"><value>Make it yours</value></data>
+  <data name="Startup" xml:space="preserve"><value>Start with Windows</value></data>
+  <data name="StartupHelp" xml:space="preserve"><value>Bring back your scene when you sign in.</value></data>
+  <data name="Fullscreen" xml:space="preserve"><value>Pause in full screen</value></data>
+  <data name="FullscreenHelp" xml:space="preserve"><value>Focus on games and videos.</value></data>
+  <data name="Battery" xml:space="preserve"><value>Pause on battery</value></data>
+  <data name="BatteryHelp" xml:space="preserve"><value>Resume after connecting to power.</value></data>
+  <data name="TrayHelp" xml:space="preserve"><value>Closing this window keeps Glasscape running.
+Use the tray menu to quit.</value></data>
+  <data name="Install" xml:space="preserve"><value>Install on this PC</value></data>
+  <data name="Language" xml:space="preserve"><value>Language</value></data>
+  <data name="LanguageSystem" xml:space="preserve"><value>System language</value></data>
+  <data name="LanguageEnglish" xml:space="preserve"><value>English</value></data>
+  <data name="LanguageKorean" xml:space="preserve"><value>한국어</value></data>
+  <data name="LanguageHelp" xml:space="preserve"><value>Applies immediately. Your choice is saved.</value></data>
+  <data name="MyWallpapers" xml:space="preserve"><value>My wallpapers</value></data>
+  <data name="ImportVideo" xml:space="preserve"><value>＋ Import video</value></data>
+  <data name="ImportVideoAccessible" xml:space="preserve"><value>Import video</value></data>
+  <data name="ApplyVideo" xml:space="preserve"><value>Apply selected</value></data>
+  <data name="RemoveVideo" xml:space="preserve"><value>Remove from library</value></data>
+  <data name="Pause" xml:space="preserve"><value>Pause</value></data>
+  <data name="Play" xml:space="preserve"><value>Play</value></data>
+  <data name="StopWallpaper" xml:space="preserve"><value>Stop wallpaper</value></data>
+  <data name="PlaybackIdle" xml:space="preserve"><value>Import and apply a video to play it on your desktop.</value></data>
+  <data name="PlaybackRunning" xml:space="preserve"><value>{0} · Playing on {1} monitor(s)</value></data>
+  <data name="PlaybackPaused" xml:space="preserve"><value>{0} · {1}</value></data>
+  <data name="AllMonitorsDetail" xml:space="preserve"><value>All monitors · {0} connected</value></data>
+  <data name="NoMonitors" xml:space="preserve"><value>No connected monitors.</value></data>
+  <data name="EmptyLibrary" xml:space="preserve"><value>＋  Import a video or drop it here
+MP4 · MKV · WebM · MOV · AVI · WMV</value></data>
+  <data name="LocalVideo" xml:space="preserve"><value>{0} · Local video</value></data>
+  <data name="FileMissing" xml:space="preserve"><value>File not found</value></data>
+  <data name="VideoPickerTitle" xml:space="preserve"><value>Choose a video wallpaper</value></data>
+  <data name="VideoFilter" xml:space="preserve"><value>Video files|*.mp4;*.mkv;*.webm;*.mov;*.avi;*.wmv</value></data>
+  <data name="VideoFormatError" xml:space="preserve"><value>Choose an MP4, MKV, WebM, MOV, AVI or WMV video file.</value></data>
+  <data name="TaskbarConnecting" xml:space="preserve"><value>Connecting to taskbar</value></data>
+  <data name="TaskbarWaiting" xml:space="preserve"><value>Waiting for taskbar</value></data>
+  <data name="TaskbarRetrying" xml:space="preserve"><value>Taskbar unavailable · retrying</value></data>
+  <data name="TaskbarApplied" xml:space="preserve"><value>Taskbar transparency is active</value></data>
+  <data name="TaskbarDefault" xml:space="preserve"><value>Default Windows taskbar</value></data>
+  <data name="TrayOpen" xml:space="preserve"><value>Open settings</value></data>
+  <data name="TrayPause" xml:space="preserve"><value>Pause video</value></data>
+  <data name="TrayPlay" xml:space="preserve"><value>Play video</value></data>
+  <data name="TrayExit" xml:space="preserve"><value>Quit</value></data>
+  <data name="TrayIdle" xml:space="preserve"><value>Glasscape · Desktop settings</value></data>
+  <data name="TrayPlaying" xml:space="preserve"><value>Glasscape · Video wallpaper playing</value></data>
+  <data name="TrayPaused" xml:space="preserve"><value>Glasscape · Video paused</value></data>
+  <data name="SettingsLoadWarning" xml:space="preserve"><value>Saved settings could not be read. Defaults were loaded and the original file was preserved.</value></data>
+  <data name="VideoImported" xml:space="preserve"><value>Video imported. The original file stays where it is.</value></data>
+  <data name="VideoNotFound" xml:space="preserve"><value>The video file could not be found.</value></data>
+  <data name="ExecutableNotFound" xml:space="preserve"><value>The executable path could not be found.</value></data>
+  <data name="ConflictingApp" xml:space="preserve"><value>TranslucentTB is running. Close it before opening Glasscape.</value></data>
+  <data name="ErrorTitle" xml:space="preserve"><value>Glasscape error</value></data>
+  <data name="StartupDenied" xml:space="preserve"><value>Windows did not enable startup. Check Startup apps in Windows Settings.</value></data>
+  <data name="AuroraFlow" xml:space="preserve"><value>Aurora Flow</value></data>
+  <data name="OceanDrift" xml:space="preserve"><value>Ocean Drift</value></data>
+  <data name="InstallerTitle" xml:space="preserve"><value>Install Glasscape</value></data>
+  <data name="InstallerHeading" xml:space="preserve"><value>Your desktop, at the next sign-in</value></data>
+  <data name="InstallerExplanation" xml:space="preserve"><value>Installs to your user programs folder and adds a Start menu shortcut.
+No administrator rights needed. Settings and original videos are kept.</value></data>
+  <data name="InstallerStartup" xml:space="preserve"><value>Start automatically when I sign in to Windows</value></data>
+  <data name="InstallerButton" xml:space="preserve"><value>Install for my account</value></data>
+  <data name="InstallerCopying" xml:space="preserve"><value>Copying application files…</value></data>
+  <data name="InstallerSourceParent" xml:space="preserve"><value>Extract the ZIP to another folder before installing. The destination cannot be inside the source folder.</value></data>
+  <data name="InstallerInvalidPath" xml:space="preserve"><value>An installation file path is invalid.</value></data>
+  <data name="InstallerMissingExe" xml:space="preserve"><value>The executable was not installed.</value></data>
+  <data name="InstallerFailed" xml:space="preserve"><value>Installation failed. Close the installed copy and try again.
+{0}</value></data>
+  <data name="InstallerShortcutFailed" xml:space="preserve"><value>The Start menu shortcut could not be created.</value></data>
+  <data name="InstallerShortcutDescription" xml:space="preserve"><value>Glasscape · Taskbar and video wallpapers</value></data>
+  <data name="WallpaperMissingEntry" xml:space="preserve"><value>The selected wallpaper is no longer in your library. Choose a video again.</value></data>
+  <data name="WallpaperInvalidPath" xml:space="preserve"><value>The video path is invalid. Choose the file again.</value></data>
+  <data name="WallpaperMissingFile" xml:space="preserve"><value>The video file was not found. Restore it or add it again: {0}</value></data>
+  <data name="WallpaperMissingPlayer" xml:space="preserve"><value>The video player is missing. Repair or reinstall Glasscape (mpv\mpv.exe).</value></data>
+  <data name="WallpaperMissingMonitor" xml:space="preserve"><value>The selected monitor is disconnected. Reconnect it or choose another monitor.</value></data>
+  <data name="WallpaperNoMonitor" xml:space="preserve"><value>No connected monitor was found.</value></data>
+  <data name="WallpaperReconnectStopped" xml:space="preserve"><value> Automatic reconnection stopped. Apply the wallpaper again.</value></data>
+  <data name="WallpaperSomeMonitors" xml:space="preserve"><value>Some monitors: {0}</value></data>
+  <data name="WallpaperPreparing" xml:space="preserve"><value>Preparing video</value></data>
+  <data name="PauseUser" xml:space="preserve"><value>Paused by you</value></data>
+  <data name="PauseLocked" xml:space="preserve"><value>Screen locked</value></data>
+  <data name="PauseSuspended" xml:space="preserve"><value>Sleep mode</value></data>
+  <data name="PauseBattery" xml:space="preserve"><value>Battery or power saver</value></data>
+  <data name="PauseFullscreen" xml:space="preserve"><value>Full-screen app</value></data>
+  <data name="DesktopNotFound" xml:space="preserve"><value>Windows desktop was not found. Try again after Explorer is ready.</value></data>
+  <data name="DesktopNotReady" xml:space="preserve"><value>The Windows desktop layer is not ready. Try applying again shortly.</value></data>
+  <data name="DesktopRestarted" xml:space="preserve"><value>The Windows desktop restarted. Reconnecting your wallpaper.</value></data>
+  <data name="DesktopRenderFailed" xml:space="preserve"><value>The desktop rendering layer could not be configured.</value></data>
+  <data name="DesktopAttachFailed" xml:space="preserve"><value>The video window could not be attached to the Windows desktop.</value></data>
+  <data name="DesktopPositionFailed" xml:space="preserve"><value>The wallpaper window could not be positioned on the monitor.</value></data>
+  <data name="PlayerStartFailed" xml:space="preserve"><value>The video player could not be started.</value></data>
+  <data name="PlayerOpenFailed" xml:space="preserve"><value>The video could not be opened. It may be damaged or in an unsupported format.</value></data>
+  <data name="PlayerTimeout" xml:space="preserve"><value>The video player timed out. Try applying a different MP4 file.</value></data>
+  <data name="PlayerConnectFailed" xml:space="preserve"><value>The video player could not be connected: {0}</value></data>
+  <data name="PlayerResponseTooLarge" xml:space="preserve"><value>The player response is too large.</value></data>
+  <data name="PlayerInvalidVideo" xml:space="preserve"><value>This video cannot be played. It may be damaged or have no video track.</value></data>
+  <data name="PlayerDisconnected" xml:space="preserve"><value>The video player disconnected. Apply the wallpaper again.</value></data>
+  <data name="PlayerCommunicationError" xml:space="preserve"><value>Video player communication error: {0}</value></data>
+  <data name="PlayerNotReady" xml:space="preserve"><value>The player connection is not ready yet.</value></data>
+  <data name="PlayerSettingsFailed" xml:space="preserve"><value>Video playback settings could not be applied: {0}</value></data>
+  <data name="PlayerExited" xml:space="preserve"><value>The video player exited (code {0}). Apply the wallpaper again.</value></data>
+  <data name="PlayerJobFailed" xml:space="preserve"><value>The video player process could not be protected for cleanup.</value></data>
+  <data name="TaskbarUnsupported" xml:space="preserve"><value>The taskbar is not ready or this Windows version is unsupported.</value></data>
+  <data name="TaskbarMissingModule" xml:space="preserve"><value>Place ExplorerTAP.dll in the same folder as the application.</value></data>
+  <data name="TaskbarNotConnected" xml:space="preserve"><value>Explorer is not connected.</value></data>
+  <data name="TaskbarTransparencyFailed" xml:space="preserve"><value>Taskbar transparency could not be applied.</value></data>
+  <data name="TaskbarRestoreFailed" xml:space="preserve"><value>The taskbar could not be restored.</value></data>
+  <data name="TaskbarOldModule" xml:space="preserve"><value>An older module remains in Explorer. Restart Windows before opening Glasscape.</value></data>
+  <data name="TaskbarAccessDenied" xml:space="preserve"><value>Access to Explorer was denied. Run Glasscape as a standard user.</value></data>
+  <data name="TaskbarServiceMissing" xml:space="preserve"><value>Explorer's service was not found. Run from File Explorer without administrator privileges.</value></data>
+  <data name="TaskbarConnectTimeout" xml:space="preserve"><value>The Explorer connection timed out. Trying again shortly.</value></data>
+  <data name="TaskbarOtherApp" xml:space="preserve"><value>Waiting for another transparency app to finish closing.</value></data>
+  <data name="TaskbarFailed" xml:space="preserve"><value>The taskbar operation failed.</value></data>
+  <data name="AutoHideFailed" xml:space="preserve"><value>Auto-hide could not be applied. Check Windows taskbar settings.</value></data>
+  <data name="AutoHideNotReady" xml:space="preserve"><value>The Windows taskbar is not ready yet.</value></data>
+</root>
+

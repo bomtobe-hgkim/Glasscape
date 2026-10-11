@@ -1,0 +1,41 @@
+{
+  "license": "CC0-1.0",
+  "encoder": "ffmpeg version 8.1.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+  "method": "Original periodic mathematical RGB fields, FFmpeg geq, Lanczos upscale, H.264 CBR encode",
+  "samples": [
+    {
+      "name": "aurora-flow",
+      "video": "aurora-flow.mp4",
+      "poster": "aurora-flow.png",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "duration_seconds": 8,
+      "frames": 240,
+      "audio_tracks": 0,
+      "codec": "H.264",
+      "pixel_format": "yuv420p",
+      "periodic_source_max_endpoint_error": 7.105427357601002e-14,
+      "bytes": 1484615,
+      "sha256": "50ef7d5688f265b1627f77107130a8cab01bc48126fe38422ca4e0e08f85eec8",
+      "poster_sha256": "4b056fce1017e39c87b44334ad47e5dd18581b613b1d81ee6d4817b761462050"
+    },
+    {
+      "name": "ocean-drift",
+      "video": "ocean-drift.mp4",
+      "poster": "ocean-drift.png",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "duration_seconds": 8,
+      "frames": 240,
+      "audio_tracks": 0,
+      "codec": "H.264",
+      "pixel_format": "yuv420p",
+      "periodic_source_max_endpoint_error": 4.263256414560601e-14,
+      "bytes": 1468861,
+      "sha256": "75aee63ad578ff60bb399b7d963d6dd81d60129a187fd9ca2c96f46e1990e482",
+      "poster_sha256": "b4139c7165b9f123af4bebe5f7b1b6a58e655bee6b51205b2a08f6c29c9b1f5c"
+    }
+  ]
+}

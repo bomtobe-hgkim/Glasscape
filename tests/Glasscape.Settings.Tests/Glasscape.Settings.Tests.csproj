@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/TransparentTaskbar/Settings/*.cs" Link="Settings/%(Filename)%(Extension)" />
+    <Compile Include="../../src/TransparentTaskbar/Packaging/PackageIdentity.cs" Link="Packaging/PackageIdentity.cs" />
+    <Compile Include="../../src/TransparentTaskbar/Localization/*.cs" Link="Localization/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../src/TransparentTaskbar/Localization/Strings*.resx" Link="Localization/%(Filename)%(Extension)" LogicalName="TransparentTaskbar.Localization.%(Filename).resources" />
+  </ItemGroup>
+</Project>

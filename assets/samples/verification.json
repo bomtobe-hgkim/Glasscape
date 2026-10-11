@@ -1,0 +1,23 @@
+{
+  "method": "FFmpeg decoded all frames; 160x90 grayscale difference across loop boundary compared to adjacent frames",
+  "results": [
+    {
+      "name": "aurora-flow",
+      "decoded_frame_count": 240,
+      "last_to_first_mean_difference_8bit": 0.3283333333333333,
+      "neighboring_mean_difference_8bit": 0.3179166666666666,
+      "seam_to_neighbor_ratio": 1.032765399737877,
+      "full_decode": "PASS",
+      "loop_boundary": "PASS"
+    },
+    {
+      "name": "ocean-drift",
+      "decoded_frame_count": 240,
+      "last_to_first_mean_difference_8bit": 0.3115277777777778,
+      "neighboring_mean_difference_8bit": 0.33100694444444445,
+      "seam_to_neighbor_ratio": 0.9411517885240743,
+      "full_decode": "PASS",
+      "loop_boundary": "PASS"
+    }
+  ]
+}
