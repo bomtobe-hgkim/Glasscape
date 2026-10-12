@@ -5,11 +5,11 @@ param(
     [string]$IdentityName = 'BOMTOBE.Glasscape',
     [string]$Publisher = 'CN=20298E27-3AA6-4580-9D83-5FC1AF024E55',
     [string]$PublisherDisplayName = 'BOMTOBE',
-    [string]$Version = '2.1.2.0'
+    [string]$Version = '2.1.3.0'
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-if (-not $Bundle) { $Bundle = Join-Path $PSScriptRoot '..\..\dist\store\Glasscape_2.1.2.0_x64.msixbundle' }
+if (-not $Bundle) { $Bundle = Join-Path $PSScriptRoot '..\..\dist\store\Glasscape_2.1.3.0_x64.msixbundle' }
 Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
 $privateReleasePathPattern = '(^|/)[^/]*\.env[^/]*$|\.(log|suo|publishsettings|pfx|p12|key|pem)$|(^|/)[^/]*(credential|secret)[^/]*\.json$|(^|/)settings\.json$'
 function Assert([bool]$Condition, [string]$Message) { if (-not $Condition) { throw $Message }; Write-Host "PASS: $Message" }

@@ -81,6 +81,22 @@ var tests = new (string Name, Action Run)[]
         controller.Dispose();
         Check(backend.Transparent.Count == 0 && backend.ConnectedProcess == 0, "Exit during initialization must never apply a late change.");
     }),
+    ("A taskbar classified once is not reclassified while Explorer keeps running", () =>
+    {
+        var kinds = new TaskbarKindCache();
+        var classified = 0;
+        Check(kinds.IsXaml(100, () => { classified++; return true; }), "First classification must be used.");
+        Check(kinds.IsXaml(100, () => throw new InvalidOperationException("Island count changed briefly.")),
+            "A brief island change in the same Explorer must not fail or flip the taskbar kind.");
+        Check(classified == 1, "The same Explorer must be classified once.");
+    }),
+    ("A restarted Explorer is classified again, and a failed classification is retried", () =>
+    {
+        var kinds = new TaskbarKindCache();
+        kinds.IsXaml(100, () => true);
+        ExpectFailure(() => kinds.IsXaml(200, () => throw new InvalidOperationException("Taskbar not ready.")));
+        Check(!kinds.IsXaml(200, () => false), "The new Explorer's own classification must be used once it succeeds.");
+    }),
     ("Releases connection even when restore fails", () =>
     {
         var backend = new DesktopBackend(new TaskbarWindow(10, 100, true)) { RestoreFailure = true };

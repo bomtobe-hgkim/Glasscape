@@ -152,7 +152,7 @@ No administrator rights needed. Settings and original videos are kept.</value></
   <data name="DesktopPositionFailed" xml:space="preserve"><value>The wallpaper window could not be positioned on the monitor.</value></data>
   <data name="PlayerStartFailed" xml:space="preserve"><value>The video player could not be started.</value></data>
   <data name="PlayerOpenFailed" xml:space="preserve"><value>The video could not be opened. It may be damaged or in an unsupported format.</value></data>
-  <data name="PlayerTimeout" xml:space="preserve"><value>The video player timed out. Try applying a different MP4 file.</value></data>
+  <data name="PlayerTimeout" xml:space="preserve"><value>The video player did not respond in time.</value></data>
   <data name="PlayerConnectFailed" xml:space="preserve"><value>The video player could not be connected: {0}</value></data>
   <data name="PlayerResponseTooLarge" xml:space="preserve"><value>The player response is too large.</value></data>
   <data name="PlayerInvalidVideo" xml:space="preserve"><value>This video cannot be played. It may be damaged or have no video track.</value></data>

@@ -10,9 +10,19 @@ namespace Glasscape.Wallpaper;
 
 internal sealed record MpvPlaybackState(bool Paused, bool Muted, int Volume, bool Fill);
 
+/// <summary>
+/// Recoverable faults come from mpv or the desktop being slow or restarting, so the player may be started again.
+/// Other faults may also mean the file itself cannot be played.
+/// </summary>
+internal sealed record MpvSessionFault(string Message, bool Recoverable);
+
 /// <summary>Owns one mpv process. All pipe work is asynchronous and each command has a deadline.</summary>
 internal sealed class MpvSession : IDisposable
 {
+    // mpv answers IPC on its playback thread, which is busy while it opens the file and GPU output.
+    // With a 4K video, single startup replies took 0.5-0.6 s and whole startups up to 9.5 s.
+    private static readonly TimeSpan StartupDeadline = TimeSpan.FromSeconds(30);
+    private const int CommandAttempts = 5;
     private readonly Process process;
     private readonly OwnedProcessJob job;
     private readonly CancellationTokenSource lifetime = new();
@@ -20,7 +30,7 @@ internal sealed class MpvSession : IDisposable
     private readonly ConcurrentDictionary<long, TaskCompletionSource<JsonElement>> requests = new();
     private readonly object stateLock = new();
     private readonly string pipeName = "glasscape-wallpaper-" + Guid.NewGuid().ToString("N");
-    private readonly Action<MpvSession, string?> changed;
+    private readonly Action<MpvSession, MpvSessionFault?> changed;
     private NamedPipeClientStream? pipe;
     private StreamWriter? writer;
     private MpvPlaybackState desiredState;
@@ -35,7 +45,7 @@ internal sealed class MpvSession : IDisposable
     internal MonitorInfo Monitor { get; set; }
 
     internal MpvSession(string executable, string filePath, WallpaperHostWindow host, MonitorInfo monitor,
-        MpvPlaybackState state, Action<MpvSession, string?> changed)
+        MpvPlaybackState state, Action<MpvSession, MpvSessionFault?> changed)
     {
         Host = host;
         Monitor = monitor;
@@ -85,7 +95,7 @@ internal sealed class MpvSession : IDisposable
             while (await process.StandardError.ReadLineAsync(lifetime.Token).ConfigureAwait(false) is { } line)
             {
                 if (line.Contains("Error opening", StringComparison.OrdinalIgnoreCase))
-                    Fail(AppText.Get("PlayerOpenFailed"));
+                    Fail(AppText.Get("PlayerOpenFailed"), recoverable: false);
             }
         }
         catch (Exception error) when (error is OperationCanceledException or IOException or ObjectDisposedException or InvalidOperationException) { }
@@ -96,7 +106,7 @@ internal sealed class MpvSession : IDisposable
         try
         {
             using var startup = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
-            startup.CancelAfter(TimeSpan.FromSeconds(10));
+            startup.CancelAfter(StartupDeadline);
             while (!startup.IsCancellationRequested)
             {
                 var attempt = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.Asynchronous);
@@ -117,7 +127,7 @@ internal sealed class MpvSession : IDisposable
             writer = new StreamWriter(pipe!, new UTF8Encoding(false), 4096, leaveOpen: true) { AutoFlush = true };
             _ = ReadMessagesAsync(pipe!);
             // file-loaded can occur before the pipe connects. Actual video output parameters confirm video decoding.
-            while (true)
+            while (Volatile.Read(ref failed) == 0)
             {
                 startup.Token.ThrowIfCancellationRequested();
                 try
@@ -128,6 +138,7 @@ internal sealed class MpvSession : IDisposable
                         break;
                 }
                 catch (MpvCommandException) { } // Video can still be opening.
+                catch (OperationCanceledException) when (!startup.IsCancellationRequested) { } // Only this reply was late.
                 await Task.Delay(150, startup.Token).ConfigureAwait(false);
             }
             if (disposed || Volatile.Read(ref failed) != 0) return;
@@ -167,7 +178,7 @@ internal sealed class MpvSession : IDisposable
                 else if (root.TryGetProperty("event", out var eventName) && eventName.GetString() == "end-file" &&
                     root.TryGetProperty("reason", out var reason) && reason.GetString() == "error")
                 {
-                    Fail(AppText.Get("PlayerInvalidVideo"));
+                    Fail(AppText.Get("PlayerInvalidVideo"), recoverable: false);
                 }
             }
             if (!disposed) Fail(AppText.Get("PlayerDisconnected"));
@@ -214,6 +225,7 @@ internal sealed class MpvSession : IDisposable
 
     private async Task UpdateLoopAsync()
     {
+        var lateReplies = 0;
         try
         {
             while (!disposed && IsReady)
@@ -221,19 +233,33 @@ internal sealed class MpvSession : IDisposable
                 MpvPlaybackState current;
                 lock (stateLock) current = desiredState;
                 if (current == sentState) return;
-                // Pause first so later settings updates never accidentally resume a locked desktop.
-                if (sentState?.Paused != current.Paused)
-                    await RequestAsync(["set_property", "pause", current.Paused], lifetime.Token).ConfigureAwait(false);
-                if (sentState?.Muted != current.Muted)
-                    await RequestAsync(["set_property", "mute", current.Muted], lifetime.Token).ConfigureAwait(false);
-                if (sentState?.Volume != current.Volume)
-                    await RequestAsync(["set_property", "volume", current.Volume], lifetime.Token).ConfigureAwait(false);
-                if (sentState?.Fill != current.Fill)
-                    await RequestAsync(["set_property", "panscan", current.Fill ? 1 : 0], lifetime.Token).ConfigureAwait(false);
-                sentState = current;
+                try
+                {
+                    // Pause first so later settings updates never accidentally resume a locked desktop.
+                    if (sentState?.Paused != current.Paused)
+                        await RequestAsync(["set_property", "pause", current.Paused], lifetime.Token).ConfigureAwait(false);
+                    if (sentState?.Muted != current.Muted)
+                        await RequestAsync(["set_property", "mute", current.Muted], lifetime.Token).ConfigureAwait(false);
+                    if (sentState?.Volume != current.Volume)
+                        await RequestAsync(["set_property", "volume", current.Volume], lifetime.Token).ConfigureAwait(false);
+                    if (sentState?.Fill != current.Fill)
+                        await RequestAsync(["set_property", "panscan", current.Fill ? 1 : 0], lifetime.Token).ConfigureAwait(false);
+                    sentState = current;
+                    lateReplies = 0;
+                }
+                // A busy mpv answers late rather than never. Setting a property again is harmless.
+                catch (OperationCanceledException) when (!disposed)
+                {
+                    if (++lateReplies >= CommandAttempts) throw;
+                    await Task.Delay(250, lifetime.Token).ConfigureAwait(false);
+                }
             }
         }
         catch (OperationCanceledException) when (disposed) { }
+        catch (OperationCanceledException)
+        {
+            Fail(AppText.Get("PlayerTimeout"));
+        }
         catch (Exception error)
         {
             if (!disposed) Fail(AppText.Format("PlayerSettingsFailed", error.Message));
@@ -252,14 +278,15 @@ internal sealed class MpvSession : IDisposable
         string code;
         try { code = process.ExitCode.ToString(); }
         catch (Exception error) when (error is InvalidOperationException or Win32Exception) { code = "?"; }
-        Fail(AppText.Format("PlayerExited", code));
+        // mpv exits with code 2 both for an unplayable file and for a GPU output it could not open.
+        Fail(AppText.Format("PlayerExited", code), recoverable: false);
     }
 
-    private void Fail(string message)
+    private void Fail(string message, bool recoverable = true)
     {
         if (disposed || Interlocked.Exchange(ref failed, 1) != 0) return;
         ready = false;
-        changed(this, message);
+        changed(this, new MpvSessionFault(message, recoverable));
     }
 
     public void Dispose()

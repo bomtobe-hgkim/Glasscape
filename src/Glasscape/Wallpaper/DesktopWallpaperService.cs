@@ -12,13 +12,14 @@ namespace Glasscape.Wallpaper;
 /// </summary>
 public sealed class DesktopWallpaperService : IDisposable
 {
+    private const int MaxRetries = 5;
     private readonly SynchronizationContext ownerContext;
     private readonly int ownerThreadId = Environment.CurrentManagedThreadId;
     private readonly List<MpvSession> sessions = [];
     private readonly string playerPath;
     private DesktopLayer? layer;
     private Guid? activeId;
-    private string? activePath, activeTitle, lastError;
+    private string? activePath, activeTitle, lastError, playedPath;
     private IReadOnlyList<MonitorInfo> selectedMonitors = [];
     private uint previousExplorerId;
     private volatile bool disposed;
@@ -210,8 +211,8 @@ public sealed class DesktopWallpaperService : IDisposable
                 }
                 catch { host.Dispose(); throw; }
             }
+            // retryCount is reset once every player shows video, so players failing after launch stay bounded.
             recovering = false;
-            retryCount = 0;
             Publish();
         }
         catch (Exception error)
@@ -242,23 +243,31 @@ public sealed class DesktopWallpaperService : IDisposable
         StopSessions();
         lastError = error;
         retryCount++;
-        recovering = retryCount <= 3;
-        nextRetry = DateTimeOffset.UtcNow.AddSeconds(Math.Pow(2, retryCount));
+        recovering = retryCount <= MaxRetries;
+        nextRetry = DateTimeOffset.UtcNow.AddSeconds(Math.Min(30, Math.Pow(2, retryCount)));
         if (!recovering) lastError += AppText.Get("WallpaperReconnectStopped");
         Publish();
     }
 
-    private void SessionChanged(MpvSession session, string? error) => Post(() =>
+    private void SessionChanged(MpvSession session, MpvSessionFault? fault) => Post(() =>
     {
         if (!sessions.Contains(session)) return;
-        if (error is not null)
+        if (fault is null)
         {
-            lastError = error;
+            playedPath = activePath;
+            if (sessions.All(item => item.IsReady)) retryCount = 0;
+            ApplyPlayback();
+        }
+        // A file that already played in this run is unlikely to be the cause, so restart it with a bounded backoff.
+        else if (fault.Recoverable || string.Equals(playedPath, activePath, StringComparison.OrdinalIgnoreCase))
+            Recover(fault.Message);
+        else
+        {
+            lastError = fault.Message;
             mediaFailed = true;
             recovering = false;
             StopSessions();
         }
-        else ApplyPlayback();
         Publish();
     });
 

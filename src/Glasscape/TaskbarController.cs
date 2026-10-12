@@ -2,6 +2,26 @@ namespace Glasscape;
 
 internal readonly record struct TaskbarWindow(nint Handle, uint ProcessId, bool IsXaml);
 
+/// <summary>
+/// Explorer keeps one taskbar implementation for its lifetime, but the XAML island count used to detect it
+/// briefly changes within one Explorer process (Windows 11 26200), so each process is classified once.
+/// </summary>
+internal sealed class TaskbarKindCache
+{
+    private uint? processId;
+    private bool isXaml;
+
+    internal bool IsXaml(uint explorerProcessId, Func<bool> classify)
+    {
+        if (processId != explorerProcessId)
+        {
+            isXaml = classify();
+            processId = explorerProcessId;
+        }
+        return isXaml;
+    }
+}
+
 internal interface ITaskbarBackend
 {
     IReadOnlyList<TaskbarWindow> FindTaskbars();

@@ -17,6 +17,7 @@ internal sealed class WindowsTaskbarBackend : ITaskbarBackend
     private ITaskbarAppearanceService? service;
     private nint nativeLibrary;
     private readonly HashSet<nint> classicTaskbars = [];
+    private readonly TaskbarKindCache kinds = new();
     private int opacity;
 
     internal int Opacity
@@ -30,7 +31,7 @@ internal sealed class WindowsTaskbarBackend : ITaskbarBackend
         var primary = NativeMethods.FindWindow("Shell_TrayWnd", null);
         if (primary == 0) return [];
         NativeMethods.GetWindowThreadProcessId(primary, out var pid);
-        var xaml = IsXamlTaskbar(primary, pid);
+        var xaml = kinds.IsXaml(pid, () => IsXamlTaskbar(primary, pid));
         var taskbars = new List<TaskbarWindow> { new(primary, pid, xaml) };
         NativeMethods.EnumWindows((hwnd, _) =>
         {

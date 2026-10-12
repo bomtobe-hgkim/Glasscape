@@ -1,5 +1,13 @@
+using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO.Pipes;
+using System.Text.Json;
 using Glasscape.Wallpaper;
+
+// MpvSession tests launch this executable again as a scripted stand-in for mpv.
+if (args.FirstOrDefault(argument => argument.StartsWith("--input-ipc-server=", StringComparison.Ordinal)) is { } ipc)
+    return await RunFakePlayerAsync(ipc[(ipc.LastIndexOf('\\') + 1)..], Environment.GetEnvironmentVariable(FakePlayer.ModeVariable) ?? "");
 
 var monitors = new[]
 {
@@ -56,7 +64,13 @@ var tests = new (string Name, Action Check)[]
         Equal(true, arguments.Contains("--panscan=0"));
         Equal(true, arguments.Contains("--mute=yes"));
         Equal(true, arguments.Contains("--volume=100"));
-    })
+    }),
+    ("A player that answers slowly while opening the video is waited for, not reported as timed out", () =>
+        Equal("ready", FakePlayer.Observe("slow-get:1500", TimeSpan.FromSeconds(4)))),
+    ("A slow reply to a playback command is retried instead of stopping the wallpaper", () =>
+        Equal("ready", FakePlayer.Observe("slow-set:1500", TimeSpan.FromSeconds(4)))),
+    ("A player that exits before showing video is not restarted on its own, since the file may be bad", () =>
+        Equal(true, FakePlayer.Observe("exit:2", TimeSpan.FromSeconds(2)).StartsWith("fatal: ", StringComparison.Ordinal)))
 };
 
 var failed = 0;
@@ -72,4 +86,52 @@ static void Equal<T>(T expected, T actual)
 {
     if (!EqualityComparer<T>.Default.Equals(expected, actual))
         throw new InvalidOperationException($"Expected {expected}, got {actual}.");
+}
+
+// Modes: "slow-get:<ms>" or "slow-set:<ms>" delay the first such reply, as mpv does while it opens
+// the file and GPU output; "exit:<code>" quits before the IPC pipe exists.
+static async Task<int> RunFakePlayerAsync(string pipeName, string mode)
+{
+    var (kind, value) = mode.Split(':') is [var name, var number] ? (name, int.Parse(number)) : ("", 0);
+    if (kind == "exit") return value;
+    using var server = new NamedPipeServerStream(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
+    await server.WaitForConnectionAsync();
+    using var reader = new StreamReader(server);
+    using var writer = new StreamWriter(server) { AutoFlush = true };
+    var delayed = false;
+    while (await reader.ReadLineAsync() is { } line)
+    {
+        using var request = JsonDocument.Parse(line);
+        var id = request.RootElement.GetProperty("request_id").GetInt64();
+        var command = request.RootElement.GetProperty("command")[0].GetString();
+        if (!delayed && (kind, command) is ("slow-get", "get_property") or ("slow-set", "set_property"))
+        {
+            delayed = true;
+            await Task.Delay(value);
+        }
+        await writer.WriteLineAsync(command == "get_property"
+            ? $"{{\"request_id\":{id},\"error\":\"success\",\"data\":{{\"w\":1920,\"h\":1080}}}}"
+            : $"{{\"request_id\":{id},\"error\":\"success\"}}");
+    }
+    return 0;
+}
+
+static class FakePlayer
+{
+    internal const string ModeVariable = "GLASSCAPE_FAKE_MPV";
+
+    // Returns every readiness or failure report made while observing, in order.
+    internal static string Observe(string mode, TimeSpan duration)
+    {
+        Environment.SetEnvironmentVariable(ModeVariable, mode);
+        var reports = new ConcurrentQueue<string>();
+        using var host = new WallpaperHostWindow();
+        using var session = new MpvSession(Environment.ProcessPath!, "C:\\fake.mp4", host,
+            new MonitorInfo("main", "Main", new Rectangle(0, 0, 1920, 1080), true),
+            new MpvPlaybackState(false, true, 0, true), (_, fault) => reports.Enqueue(fault is null ? "ready"
+                : $"{(fault.Recoverable ? "recoverable" : "fatal")}: {fault.Message}"));
+        var clock = Stopwatch.StartNew();
+        while (clock.Elapsed < duration) Thread.Sleep(50);
+        return string.Join(" | ", reports);
+    }
 }
