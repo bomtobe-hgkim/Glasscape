@@ -5,7 +5,7 @@ param(
     [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$Publisher,
     [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$PublisherDisplayName,
     [Parameter(Mandatory = $true)][ValidatePattern('^[A-Z0-9]{12}$')][string]$StoreId,
-    [ValidatePattern('^\d+\.\d+\.\d+\.\d+$')][string]$Version = '2.1.3.0',
+    [ValidatePattern('^\d+\.\d+\.\d+\.\d+$')][string]$Version = '2.1.4.0',
     [string]$OutputDirectory,
     [string]$SdkBinDirectory,
     [switch]$SkipBuild

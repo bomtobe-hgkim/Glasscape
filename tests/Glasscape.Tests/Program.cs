@@ -105,6 +105,70 @@ var tests = new (string Name, Action Run)[]
         ExpectFailure(controller.Dispose);
         Check(backend.ConnectedProcess == 0, "Native resources must be released after failed restore.");
         controller.Dispose();
+    }),
+    ("Stages the native module outside its protected installation directory", () =>
+    {
+        WithModule((source, cache) =>
+        {
+            var staged = TaskbarModuleCache.Prepare(source, cache);
+            Check(Path.GetFullPath(staged).StartsWith(Path.GetFullPath(cache) + Path.DirectorySeparatorChar),
+                "Explorer must load from the user cache instead of WindowsApps.");
+            Check(File.ReadAllBytes(staged).SequenceEqual(new byte[] { 1, 2, 3, 4 }), "The native module must be copied unchanged.");
+        });
+    }),
+    ("Reuses a cached module while Explorer holds it open", () =>
+    {
+        WithModule((source, cache) =>
+        {
+            var staged = TaskbarModuleCache.Prepare(source, cache);
+            using var loaded = File.Open(staged, FileMode.Open, FileAccess.Read, FileShare.Read);
+            Check(TaskbarModuleCache.Prepare(source, cache) == staged, "Reconnection must reuse the loaded copy without overwriting it.");
+        });
+    }),
+    ("Stages a new native version without overwriting Explorer's loaded module", () =>
+    {
+        WithModule((source, cache) =>
+        {
+            var previous = TaskbarModuleCache.Prepare(source, cache);
+            using var loaded = File.Open(previous, FileMode.Open, FileAccess.Read, FileShare.Read);
+            File.WriteAllBytes(source, [5, 6, 7, 8]);
+            var updated = TaskbarModuleCache.Prepare(source, cache);
+            Check(updated != previous, "Different native contents must have separate paths.");
+            Check(File.ReadAllBytes(previous).SequenceEqual(new byte[] { 1, 2, 3, 4 }), "The loaded version must remain intact.");
+            Check(File.ReadAllBytes(updated).SequenceEqual(new byte[] { 5, 6, 7, 8 }), "The new native version must be available.");
+        });
+    }),
+    ("Repairs a damaged cached native module before loading it", () =>
+    {
+        WithModule((source, cache) =>
+        {
+            var staged = TaskbarModuleCache.Prepare(source, cache);
+            File.WriteAllBytes(staged, [9]);
+            var repaired = TaskbarModuleCache.Prepare(source, cache);
+            Check(File.ReadAllBytes(repaired).SequenceEqual(new byte[] { 1, 2, 3, 4 }), "A damaged cached DLL must be replaced with the bundled bytes.");
+        });
+    }),
+    ("Concurrent native staging publishes one complete module", () =>
+    {
+        WithModule((source, cache) =>
+        {
+            var paths = new string[16];
+            Parallel.For(0, paths.Length, i => paths[i] = TaskbarModuleCache.Prepare(source, cache));
+            Check(paths.Distinct().Count() == 1, "Concurrent clients must agree on the native module path.");
+            Check(File.ReadAllBytes(paths[0]).SequenceEqual(new byte[] { 1, 2, 3, 4 }), "Concurrent staging must not expose a partial DLL.");
+            Check(Directory.GetFiles(cache, "*.tmp", SearchOption.AllDirectories).Length == 0, "Staging must clean its temporary files.");
+        });
+    }),
+    ("A cached module does not hide a missing bundled dependency", () =>
+    {
+        WithModule((source, cache) =>
+        {
+            TaskbarModuleCache.Prepare(source, cache);
+            File.Delete(source);
+            try { TaskbarModuleCache.Prepare(source, cache); }
+            catch (FileNotFoundException) { return; }
+            throw new Exception("A missing bundled dependency must be reported instead of trusting the cache.");
+        });
     })
 };
 
@@ -127,6 +191,16 @@ static void ExpectFailure(Action run)
     try { run(); }
     catch (InvalidOperationException) { return; }
     throw new Exception("Expected native operation failure to be reported.");
+}
+
+static void WithModule(Action<string, string> run)
+{
+    var root = Path.Combine(Path.GetTempPath(), "Glasscape-module-test-" + Guid.NewGuid().ToString("N"));
+    Directory.CreateDirectory(Path.Combine(root, "WindowsApps"));
+    var source = Path.Combine(root, "WindowsApps", "ExplorerTAP.dll");
+    File.WriteAllBytes(source, [1, 2, 3, 4]);
+    try { run(source, Path.Combine(root, "user-cache")); }
+    finally { Directory.Delete(root, recursive: true); }
 }
 
 sealed class DesktopBackend(params TaskbarWindow[] taskbars) : ITaskbarBackend

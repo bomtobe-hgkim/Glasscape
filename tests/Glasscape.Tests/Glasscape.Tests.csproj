@@ -7,5 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="../../src/Glasscape/TaskbarController.cs" Link="TaskbarController.cs" />
+    <Compile Include="../../src/Glasscape/TaskbarModuleCache.cs" Link="TaskbarModuleCache.cs" />
   </ItemGroup>
 </Project>

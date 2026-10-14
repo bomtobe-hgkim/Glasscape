@@ -1,4 +1,5 @@
 using Glasscape.Localization;
+using Glasscape.Packaging;
 // SPDX-License-Identifier: GPL-3.0-only
 // Glasscape changes Copyright (c) 2026 BOMTOBE.
 // Taskbar classification/restoration adapted from TranslucentTB 2026.2.
@@ -85,7 +86,15 @@ internal sealed class WindowsTaskbarBackend : ITaskbarBackend
             var dllPath = Path.Combine(AppContext.BaseDirectory, "ExplorerTAP.dll");
             if (!File.Exists(dllPath))
                 throw new FileNotFoundException(AppText.Get("TaskbarMissingModule"), dllPath);
-            nativeLibrary = NativeLibrary.Load(dllPath);
+            // WindowsApps modules cannot be injected into the unpackaged Explorer.
+            // Use an unchanged copy in a readable user folder, as upstream does.
+            // Resolve the package's physical cache folder explicitly: a virtualized
+            // LocalAppData path would not resolve to the same file in Explorer.
+            var localDirectory = PackageIdentity.IsPackaged
+                ? Path.Combine(Windows.Storage.ApplicationData.Current.LocalCacheFolder.Path, "Local")
+                : Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var cacheDirectory = Path.Combine(localDirectory, "Glasscape", "Native");
+            nativeLibrary = NativeLibrary.Load(TaskbarModuleCache.Prepare(dllPath, cacheDirectory));
             // Retain until process exit: the DLL registers an in-process COM proxy factory.
         }
 
